@@ -1,0 +1,39 @@
+.Patchy {
+
+    &_head,
+    &_blink,
+    &_hand,
+    &_shot,
+    &_body {
+        min-width: 800px;
+        min-height: 675px;
+        max-width: 800px;
+        max-height: 675px;
+
+        background-position: 0px 0px;
+        background-size: 8000px 1350px;
+    }
+
+    &_head {
+        background-image: url('/head.webp');
+    }
+
+
+    &_body {
+        background-image: url('/body.webp');
+    }
+
+    // &_blink {
+    //     background-image: url('/blink.webp');
+    // }
+
+    &_hand {
+        background-image: url('/hand.webp');
+    }
+
+    &_shot {
+        background-size: 8000px 675px;
+        background-image: url('/shot.webp');
+    }
+
+}
