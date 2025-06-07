@@ -11,10 +11,10 @@ function App() {
   return (
     <div className='App'>
 
-      {/* <Kill /> */}
+      <Kill />
       {/* <LightTest /> */}
 
-      <Patchy />
+      {/* <Patchy /> */}
     </div>
   )
 }
