@@ -5,19 +5,17 @@ const sharp = require('sharp');
 // === НАСТРОЙКИ ===
 const inputDir = './images';
 const outputDir = './cropped';
-const cropPercent = {
-    left: 0.5,
-    top: 0.2,
-    bottom: 0.2,
-    right: 0.1
-};
-
 const outputWidth = 500;             // ширина каждой картинки
 const webpQuality = 80;              // качество webp (0–100)
-const framesPerRow = 8;             // количество кадров в строке
+const cropPercent = {
+    left: 0.1,
+    top: 0.16,
+    bottom: 0.16,
+    right: 0.5
+};
 const outputMode = 0;                // 0 = только спрайт, 1 = только картинки, 2 = всё
-
-
+const framesPerRow = 8;             // количество кадров в строке
+// ==================
 
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
 

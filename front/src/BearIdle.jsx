@@ -11,13 +11,14 @@ export default observer(({ frame, show }) => {
     // Загрузка спрайтшита
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyHand.webp';
+        img.src = '/bear.webp'; // Замените на путь к вашему спрайтшиту
         img.onload = () => setImage(img);
     }, []);
 
+    // Параметры анимации
     const framesInRow = 8;
     const frameW = 500;
-    const frameH = 422;
+    const frameH = 478;
     const framesCount = 61;
 
     const animations = {
@@ -41,8 +42,8 @@ export default observer(({ frame, show }) => {
                     animations={animations}
                     frameRate={animStore.fps} // Скорость анимации (кадры в секунду)
                     frameIndex={frame}
-                    x={window.innerWidth - 100 - frameW} // Центрирование по X
-                    y={window.innerHeight / 2 - (frameH / 2)} // Центрирование по Y
+                    x={100} // Центрирование по X
+                    y={window.innerHeight / 2 - 239} // Центрирование по Y
                 />
             )}
         </>

@@ -11,7 +11,7 @@ export default observer(({ frame, show }) => {
     // Загрузка спрайтшита
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyHand.webp';
+        img.src = '/patchyShot.webp';
         img.onload = () => setImage(img);
     }, []);
 
@@ -30,10 +30,12 @@ export default observer(({ frame, show }) => {
         animations.run.push(x, y, frameW, frameH);
     }
 
+
     return (
         <>
             {image && (
                 <Sprite
+
                     opacity={show ? 1 : 0}
                     ref={spriteRef}
                     image={image}

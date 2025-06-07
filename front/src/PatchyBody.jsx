@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Sprite } from 'react-konva';
 import animStore from './animStore';
 
-export default observer(({ frame, show }) => {
+export default observer(({ frame }) => {
 
     const spriteRef = useRef();
     const [image, setImage] = useState(null);
@@ -11,7 +11,7 @@ export default observer(({ frame, show }) => {
     // Загрузка спрайтшита
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyHand.webp';
+        img.src = '/patchyBody.webp';
         img.onload = () => setImage(img);
     }, []);
 
@@ -34,7 +34,6 @@ export default observer(({ frame, show }) => {
         <>
             {image && (
                 <Sprite
-                    opacity={show ? 1 : 0}
                     ref={spriteRef}
                     image={image}
                     animation="run"

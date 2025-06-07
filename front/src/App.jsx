@@ -1,7 +1,6 @@
+import animStore from './animStore';
 import './App.scss';
-import Kill from './Kill';
-import LightTest from './LightTest';
-import Patchy from './Patchy';
+import Canvas from './Canvas';
 
 
 
@@ -9,12 +8,10 @@ function App() {
 
 
   return (
-    <div className='App'>
+    <div className='App' onClick={() => { animStore.shot() }}>
 
       {/* <Kill /> */}
-      {/* <LightTest /> */}
-
-      <Patchy />
+      <Canvas />
     </div>
   )
 }
