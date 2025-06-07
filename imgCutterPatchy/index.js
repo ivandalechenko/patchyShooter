@@ -13,7 +13,7 @@ const cropPercent = {
     bottom: 0.2,
     right: 0.1
 };
-const outputMode = 1;                // 0 = только спрайт, 1 = только картинки, 2 = всё
+const outputMode = 0;                // 0 = только спрайт, 1 = только картинки, 2 = всё
 const framesPerRow = 20;             // количество кадров в строке
 // ==================
 
