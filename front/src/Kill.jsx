@@ -107,6 +107,12 @@ export default observer(() => {
             <path d="M1361.91 85.5V512.5H1359.3V85.5H1361.91Z" stroke-opacity="0.7" />
             <path d="M1541 0V491H1520V0H1541Z" fill="url(#paint32_linear_2624_78)" className='line_letterT' style={{ transform: `scaleY(${scaleLast}) translateY(${top}px)` }} />
             <path d="M1540.5 0.5V490.5H1520.5V0.5H1540.5Z" stroke-opacity="0.8" />
+<path
+  d="M1528.8 0H1532.41V491H1528.8V0Z"
+  fill="url(#paint31_linear_2624_78)"
+  className="line_letterT"
+  style={{ transform: `scaleY(${scaleLast}) translateY(${top * 5}px)` }}
+/>
             <defs>
                 <linearGradient id="paint0_linear_2624_78" x1="779.5" y1="-119.416" x2="779.5" y2="514.584" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#52E3B4" />
