@@ -46,7 +46,7 @@ function App() {
       onPointerDown={() => { animStore.shot() }}
       onPointerLeave={() => {
         console.log('leave');
-        animStore.fps = 5
+        if (window.innerWidth > 800) animStore.fps = 5
       }}
       onPointerEnter={() => {
         console.log('enter');

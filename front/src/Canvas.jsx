@@ -5,14 +5,18 @@ import animStore from './animStore';
 
 import BearIdle from './BearIdle';
 import BearShot from './BearShot';
+import BearHole1 from './BearHole1';
+import BearHole2 from './BearHole2';
+import BearBlood from './BearBlood';
+
 import PatchyHead from './PatchyHead';
 import PatchyHand from './PatchyHand';
 import PatchyBody from './PatchyBody';
 import PatchyBlink from './PatchyBlink';
 import PatchyShot from './PatchyShot';
-import BearHole1 from './BearHole1';
-import BearHole2 from './BearHole2';
-import BearBlood from './BearBlood';
+import PatchyMob from './PatchyMob';
+import PatchyMobBlink from './PatchyMobBlink';
+
 
 const SpriteAnimation = () => {
     const frameShot = useRef(0);
@@ -86,28 +90,35 @@ const SpriteAnimation = () => {
     return (
         <Stage width={window.innerWidth} height={window.innerHeight}>
             {/* Bear Layer */}
-            <Layer y={window.innerHeight / 8}>
-                {window.innerWidth > 800 && (
-                    <Group x={bearX}>
-                        <BearIdle frame={currentFrameShot} show={!showShot} />
-                        <BearShot frame={currentFrameShot} show={showShot} />
-                        <BearBlood frame={currentFrameShot} show={showShot} />
-                        <BearHole1 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger < 0.5} />
-                        <BearHole2 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger >= 0.5} />
-                    </Group>
-                )}
-            </Layer>
+            {window.innerWidth > 800 && (
+                <>
+                    <Layer y={window.innerHeight / 8}>
+                        <Group x={bearX}>
+                            <BearIdle frame={currentFrameShot} show={!showShot} />
+                            <BearShot frame={currentFrameShot} show={showShot} />
+                            <BearBlood frame={currentFrameShot} show={showShot} />
+                            <BearHole1 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger < 0.5} />
+                            <BearHole2 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger >= 0.5} />
+                        </Group>
+                    </Layer>
 
-            {/* Patchy Layer */}
-            <Layer y={window.innerHeight / 8}>
-                <Group x={patchyX} y={patchyY}>
-                    <PatchyBody frame={currentFrame} />
-                    <PatchyShot frame={currentFrameShot} show={showShot} />
-                    <PatchyHand frame={currentFrameShot} show={!showShot} />
-                    <PatchyHead frame={currentFrame} />
-                    <PatchyBlink frame={currentFrame} />
-                </Group>
-            </Layer>
+                    <Layer y={window.innerHeight / 8}>
+                        <Group x={patchyX} y={patchyY}>
+                            <PatchyBody frame={currentFrame} />
+                            <PatchyShot frame={currentFrameShot} show={showShot} />
+                            <PatchyHand frame={currentFrameShot} show={!showShot} />
+                            <PatchyHead frame={currentFrame} />
+                            <PatchyBlink frame={currentFrame} />
+                        </Group>
+                    </Layer>
+                </>
+            )}
+            {window.innerWidth <= 800 &&
+                <Layer>
+                    <PatchyMob frame={currentFrame} />
+                    <PatchyMobBlink frame={currentFrame} />
+                </Layer>
+            }
         </Stage>
     );
 };
