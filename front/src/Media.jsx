@@ -11,6 +11,12 @@ export default () => {
             <a href="https://dexscreener.com/solana/a8mbsuqkajmtsu42jdwphjko3vqc9srdfpdsf3sz5huf" target='_blank'>
                 <img src="/dex.svg" alt="" />
             </a>
+            <a className='Media_inactive'>
+                <img src="/inst.svg" alt="" />
+            </a>
+            <a className='Media_inactive'>
+                <img src="/tt.svg" alt="" />
+            </a>
         </div>
     )
 }

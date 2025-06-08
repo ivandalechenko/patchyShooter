@@ -17,6 +17,7 @@ function App() {
 
   return (
     <div className='App' onPointerDown={() => { animStore.shot() }}>
+      <div className='App_noise'></div>
       <div className='App_header_wrapper free_img'>
         <div className='App_header' >
           <Kill />
