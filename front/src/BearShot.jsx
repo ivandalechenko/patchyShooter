@@ -1,53 +1,60 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Sprite } from 'react-konva';
-import animStore from './animStore';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Sprite } from 'react-konva';
 
 export default observer(({ frame, show }) => {
-
     const spriteRef = useRef();
     const [image, setImage] = useState(null);
 
-    // Загрузка спрайтшита
     useEffect(() => {
         const img = new window.Image();
-        // img.src = '/bearShot.webp'; // Замените на путь к вашему спрайтшиту
-        img.src = '/bearShot.webp'; // Замените на путь к вашему спрайтшиту
-
-
+        img.src = '/bearShot.webp';
         img.onload = () => setImage(img);
     }, []);
 
-    const framesInRow = 8;
-    const frameW = 500;
-    const frameH = 478;
-    const framesCount = 21;
+    const animations = useMemo(() => {
+        const run = [];
+        for (let i = 0; i < 21; i++) {
+            const x = (i % 8) * 500;
+            const y = Math.floor(i / 8) * 478;
+            run.push(x, y, 500, 478);
+        }
+        return { run };
+    }, []);
 
-    const animations = {
-        run: [],
-    };
+    useEffect(() => {
+        if (spriteRef.current) {
+            spriteRef.current.frameIndex(frame);
+        }
+    }, [frame]);
 
-    for (let i = 0; i < framesCount; i++) {
-        const x = (i % framesInRow) * frameW;
-        const y = Math.floor(i / framesInRow) * frameH;
-        animations.run.push(x, y, frameW, frameH);
-    }
+    useEffect(() => {
+        if (spriteRef.current) {
+            spriteRef.current.opacity(show ? 1 : 0);
+            spriteRef.current.getLayer().batchDraw();
+        }
+    }, [show]);
+
+    useEffect(() => {
+        if (spriteRef.current) {
+            spriteRef.current.opacity(0);
+        }
+    }, []);
+
 
     return (
         <>
             {image && (
                 <Sprite
-                    opacity={show ? 1 : 0}
                     ref={spriteRef}
                     image={image}
                     animation="run"
                     animations={animations}
-                    frameRate={animStore.fps} // Скорость анимации (кадры в секунду)
-                    frameIndex={frame}
-                    x={100} // Центрирование по X
-                    y={window.innerHeight / 2 - 239} // Центрирование по Y
+                    x={100}
+                    opacity={0}
+                    y={window.innerHeight / 2 - 239}
                 />
             )}
         </>
-    )
-})
+    );
+});

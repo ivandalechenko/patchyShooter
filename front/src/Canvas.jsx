@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Sprite, Group } from 'react-konva';
+import { Stage, Layer, Group } from 'react-konva';
 import { observer } from 'mobx-react-lite';
 import animStore from './animStore';
 
@@ -14,141 +14,101 @@ import BearHole1 from './BearHole1';
 import BearHole2 from './BearHole2';
 import BearBlood from './BearBlood';
 
-
-
 const SpriteAnimation = () => {
-
     const frameShot = useRef(0);
-    const shotFramesCounter = useRef(0)
-    const [showShot, setshowShot] = useState(false);
-
+    const shotFramesCounter = useRef(0);
+    const [showShot, setShowShot] = useState(false);
+    const [currentFrameShot, setCurrentFrameShot] = useState(0);
     const timerShotRef = useRef(null);
-    const [currentFrameShot, setcurrentFrameShot] = useState(0);
-
 
     useEffect(() => {
-        clearTimeout(timerShotRef.current)
+        clearTimeout(timerShotRef.current);
+        setShowShot(animStore.shotBearTrigger !== 0);
 
-        setshowShot(animStore.shotBearTrigger !== 0 ? true : false)
+        frameShot.current = -1;
+        shotFramesCounter.current = 0;
 
-        if (animStore.shotBearTrigger !== 0) {
+        const runFrame = () => {
+            frameShot.current = (frameShot.current + 1) % animStore.framesCount;
+            setCurrentFrameShot(frameShot.current);
 
-            shotFramesCounter.current = 0
-            frameShot.current = -1
-
-            const runFrame = () => {
-                frameShot.current = (frameShot.current + 1) % animStore.framesCount;
-                setcurrentFrameShot(frameShot.current)
-
-                shotFramesCounter.current = shotFramesCounter.current + 1
+            if (animStore.shotBearTrigger !== 0) {
+                shotFramesCounter.current += 1;
                 if (shotFramesCounter.current >= animStore.bearShotFramesCount) {
-                    animStore.shotBearEnd()
+                    animStore.shotBearEnd();
                 }
-                timerShotRef.current = setTimeout(() => {
-                    runFrame()
-                }, 1000 / animStore.fps);
             }
 
-            runFrame()
+            timerShotRef.current = setTimeout(runFrame, 1000 / animStore.fps);
+        };
 
-        } else {
-            frameShot.current = -1
-
-            const runFrame = () => {
-                frameShot.current = (frameShot.current + 1) % animStore.framesCount;
-                setcurrentFrameShot(frameShot.current)
-
-                timerShotRef.current = setTimeout(() => {
-                    runFrame()
-                }, 1000 / animStore.fps);
-            }
-            runFrame()
-
-        }
-
+        runFrame();
 
         return () => {
-            clearTimeout(timerShotRef.current)
-        }
-    }, [animStore.shotBearTrigger])
-
-
+            clearTimeout(timerShotRef.current);
+        };
+    }, [animStore.shotBearTrigger]);
 
     const frame = useRef(0);
-    const [currentFrame, setcurrentFrame] = useState(0);
+    const [currentFrame, setCurrentFrame] = useState(0);
     const timerRef = useRef(null);
 
     useEffect(() => {
-        frame.current = -1
-
+        frame.current = -1;
         const runFrame = () => {
             frame.current = (frame.current + 1) % animStore.framesCount;
-            setcurrentFrame(frame.current)
-
-            timerRef.current = setTimeout(() => {
-                runFrame()
-            }, 1000 / animStore.fps);
-        }
-
-        runFrame()
+            setCurrentFrame(frame.current);
+            timerRef.current = setTimeout(runFrame, 1000 / animStore.fps);
+        };
+        runFrame();
 
         return () => {
-            clearTimeout(timerRef.current)
-        }
-    }, [])
+            clearTimeout(timerRef.current);
+        };
+    }, []);
 
+    const bearX = window.innerWidth > 1800
+        ? window.innerWidth / 8
+        : window.innerWidth < 1200
+            ? -window.innerWidth / 6
+            : 0;
+
+    const patchyX = window.innerWidth > 1800
+        ? -window.innerWidth / 8
+        : window.innerWidth < 1200
+            ? window.innerWidth < 800
+                ? (-window.innerWidth + 100 + 500) + (window.innerWidth / 2) - 250 + 20
+                : window.innerWidth / 6
+            : 0;
+
+    const patchyY = window.innerWidth < 800 ? -window.innerHeight / 16 : 0;
 
     return (
-        <>
-            <Stage width={window.innerWidth} height={window.innerHeight}>
-                <Layer
-                    y={window.innerHeight / 8}
-                >
-                    {
-                        window.innerWidth > 800 && <Group
-                            x={
-                                window.innerWidth > 1800
-                                    ? window.innerWidth / 8
-                                    : window.innerWidth < 1200
-                                        ? -window.innerWidth / 6
-                                        : 0
-                            }
-
-                        >
-                            <BearBlood frame={currentFrameShot} show={showShot} />
-                            <BearIdle frame={currentFrameShot} show={!showShot} />
-                            <BearShot frame={currentFrameShot} show={showShot} />
-                            <BearHole1 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger < .5} />
-                            <BearHole2 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger >= .5} />
-                        </Group>
-                    }
-
-                    <Group
-                        x={
-                            window.innerWidth > 1800
-                                ? -window.innerWidth / 8
-                                : window.innerWidth < 1200
-                                    ? window.innerWidth < 800
-                                        ? (- window.innerWidth + 100 + 500) + (window.innerWidth / 2) - 500 / 2 + 20
-                                        : +window.innerWidth / 6
-                                    : 0
-                        }
-                        y={
-                            window.innerWidth < 800
-                                ? -window.innerHeight / 16
-                                : 0
-                        }
-                    >
-                        <PatchyBody frame={currentFrame} />
-                        <PatchyShot frame={currentFrameShot} show={showShot} />
-                        <PatchyHand frame={currentFrameShot} show={!showShot} />
-                        <PatchyHead frame={currentFrame} />
-                        <PatchyBlink frame={currentFrame} />
+        <Stage width={window.innerWidth} height={window.innerHeight}>
+            {/* Bear Layer */}
+            <Layer y={window.innerHeight / 8}>
+                {window.innerWidth > 800 && (
+                    <Group x={bearX}>
+                        <BearIdle frame={currentFrameShot} show={!showShot} />
+                        <BearShot frame={currentFrameShot} show={showShot} />
+                        <BearBlood frame={currentFrameShot} show={showShot} />
+                        <BearHole1 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger < 0.5} />
+                        <BearHole2 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger >= 0.5} />
                     </Group>
+                )}
+            </Layer>
 
-                </Layer>
-            </Stage >
-        </>
+            {/* Patchy Layer */}
+            <Layer y={window.innerHeight / 8}>
+                <Group x={patchyX} y={patchyY}>
+                    <PatchyBody frame={currentFrame} />
+                    <PatchyShot frame={currentFrameShot} show={showShot} />
+                    <PatchyHand frame={currentFrameShot} show={!showShot} />
+                    <PatchyHead frame={currentFrame} />
+                    <PatchyBlink frame={currentFrame} />
+                </Group>
+            </Layer>
+        </Stage>
     );
 };
 
