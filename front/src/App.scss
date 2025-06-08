@@ -71,10 +71,17 @@
             top: -50px;
             width: 100% !important;
             align-items: end !important;
+            z-index: 0;
 
             @media(max-width: 500px) {
                 top: 0px;
             }
         }
+    }
+
+    &_canvas {
+        position: relative;
+        z-index: 1;
+        pointer-events: none;
     }
 }

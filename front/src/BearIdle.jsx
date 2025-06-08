@@ -29,13 +29,6 @@ export default observer(({ frame, show }) => {
         return { run };
     }, []);
 
-    // Устанавливаем начальную прозрачность = 0 при монтировании
-    useEffect(() => {
-        if (spriteRef.current) {
-            spriteRef.current.opacity(0);
-        }
-    }, []);
-
     // Обновляем opacity при изменении show
     useEffect(() => {
         if (spriteRef.current) {

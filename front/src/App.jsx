@@ -60,7 +60,9 @@ function App() {
           <Kill />
         </div>
       </div>
-      <Canvas />
+      <div className='App_canvas'>
+        <Canvas />
+      </div>
       <div className='App_footer_wrapper free_img'>
         <div className='App_footer' >
           <Media />

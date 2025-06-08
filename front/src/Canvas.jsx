@@ -87,6 +87,14 @@ const SpriteAnimation = () => {
 
     const patchyY = window.innerWidth < 800 ? -window.innerHeight / 16 : 0;
 
+
+
+    const bearIdleRef = useRef(null)
+
+
+
+
+
     return (
         <Stage width={window.innerWidth} height={window.innerHeight}>
             {/* Bear Layer */}
@@ -102,7 +110,7 @@ const SpriteAnimation = () => {
                         </Group>
                     </Layer>
 
-                    <Layer y={window.innerHeight / 8}>
+                    {/* <Layer y={window.innerHeight / 8}>
                         <Group x={patchyX} y={patchyY}>
                             <PatchyBody frame={currentFrame} />
                             <PatchyShot frame={currentFrameShot} show={showShot} />
@@ -110,7 +118,8 @@ const SpriteAnimation = () => {
                             <PatchyHead frame={currentFrame} />
                             <PatchyBlink frame={currentFrame} />
                         </Group>
-                    </Layer>
+                    </Layer> */}
+
                 </>
             )}
             {window.innerWidth <= 800 &&
