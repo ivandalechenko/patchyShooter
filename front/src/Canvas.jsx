@@ -129,7 +129,7 @@ const SpriteAnimation = () => {
                                 ? -window.innerWidth / 8
                                 : window.innerWidth < 1200
                                     ? window.innerWidth < 800
-                                        ? (- window.innerWidth + 100 + 500) + (window.innerWidth / 2) - 500 / 2
+                                        ? (- window.innerWidth + 100 + 500) + (window.innerWidth / 2) - 500 / 2 + 20
                                         : +window.innerWidth / 6
                                     : 0
                         }
