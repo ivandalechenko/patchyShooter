@@ -1,0 +1,49 @@
+.Kill {}
+
+.line_letterI_width,
+.line_letterI_height,
+.line_letterL,
+.line_letterSecL,
+.line_letterHfirst,
+.line_letterHSec,
+.line_letterM,
+.line_letterK,
+.line_letterT {
+    transform-origin: bottom;
+    transition: transform 1000ms ease-in-out;
+}
+
+.line_letterL {
+    transform-origin: bottom;
+    transform: scaleY(1.8);
+}
+
+.line_letterSecL {
+    transform-origin: bottom;
+    transform: scaleY(1.8);
+}
+
+.line_letterHfirst {
+    transform-origin: bottom;
+    transform: scaleY(.9);
+}
+
+.line_letterHSec {
+    transform-origin: bottom;
+    transform: scaleY(1.5);
+}
+
+.line_letterM {
+    transform-origin: bottom;
+    transform: scaleY(.9);
+}
+
+.line_letterK {
+    transform-origin: bottom;
+    transform: scaleY(.9);
+}
+
+.line_letterT {
+    transform-origin: bottom;
+    transform: scaleY(.5);
+}

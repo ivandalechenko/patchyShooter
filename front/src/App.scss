@@ -1,6 +1,35 @@
 .App {
-    background: #000;
+    background: linear-gradient(170deg, #1E1C1C, #3B3737);
     height: 100vh;
     width: 100%;
     overflow: hidden;
+
+    &_header {
+
+        svg {
+            max-width: 40vw;
+            width: 100%;
+
+            @media(max-width: 900px) {
+                max-width: 90vw;
+            }
+
+            // height: 100vh;
+        }
+
+        &_wrapper {
+            top: -200px;
+            width: 100% !important;
+            align-items: start !important;
+        }
+    }
+
+    &_footer {
+
+        &_wrapper {
+            top: -50px;
+            width: 100% !important;
+            align-items: end !important;
+        }
+    }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Sprite } from 'react-konva';
+import { Stage, Layer, Sprite, Group } from 'react-konva';
 import { observer } from 'mobx-react-lite';
 import animStore from './animStore';
 
@@ -10,6 +10,9 @@ import PatchyHand from './PatchyHand';
 import PatchyBody from './PatchyBody';
 import PatchyBlink from './PatchyBlink';
 import PatchyShot from './PatchyShot';
+import BearHole1 from './BearHole1';
+import BearHole2 from './BearHole2';
+import BearBlood from './BearBlood';
 
 
 
@@ -98,19 +101,53 @@ const SpriteAnimation = () => {
     return (
         <>
             <Stage width={window.innerWidth} height={window.innerHeight}>
-                <Layer>
-                    <BearShot frame={currentFrameShot} show={showShot} />
-                    <BearIdle frame={currentFrameShot} show={!showShot} />
+                <Layer
+                    y={window.innerHeight / 8}
+                >
+                    {
+                        window.innerWidth > 800 && <Group
+                            x={
+                                window.innerWidth > 1800
+                                    ? window.innerWidth / 8
+                                    : window.innerWidth < 1200
+                                        ? -window.innerWidth / 6
+                                        : 0
+                            }
 
-                    <PatchyBody frame={currentFrame} />
+                        >
+                            <BearBlood frame={currentFrameShot} show={showShot} />
+                            <BearIdle frame={currentFrameShot} show={!showShot} />
+                            <BearShot frame={currentFrameShot} show={showShot} />
+                            <BearHole1 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger < .5} />
+                            <BearHole2 frame={currentFrameShot} show={showShot && animStore.shotBearTrigger >= .5} />
+                        </Group>
+                    }
 
-                    <PatchyShot frame={currentFrameShot} show={showShot} />
-                    <PatchyHand frame={currentFrameShot} show={!showShot} />
+                    <Group
+                        x={
+                            window.innerWidth > 1800
+                                ? -window.innerWidth / 8
+                                : window.innerWidth < 1200
+                                    ? window.innerWidth < 800
+                                        ? (- window.innerWidth + 100 + 500) + (window.innerWidth / 2) - 500 / 2
+                                        : +window.innerWidth / 6
+                                    : 0
+                        }
+                        y={
+                            window.innerWidth < 800
+                                ? -window.innerHeight / 16
+                                : 0
+                        }
+                    >
+                        <PatchyBody frame={currentFrame} />
+                        <PatchyShot frame={currentFrameShot} show={showShot} />
+                        <PatchyHand frame={currentFrameShot} show={!showShot} />
+                        <PatchyHead frame={currentFrame} />
+                        <PatchyBlink frame={currentFrame} />
+                    </Group>
 
-                    <PatchyHead frame={currentFrame} />
-                    <PatchyBlink frame={currentFrame} />
                 </Layer>
-            </Stage>
+            </Stage >
         </>
     );
 };

@@ -13,6 +13,9 @@ class AnimStore {
     shotBearTrigger = 0;
     isBlink = false;
 
+    mouseX = 0;
+    mouseY = 0;
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -39,6 +42,11 @@ class AnimStore {
         setTimeout(() => {
             this.isBlink = false;
         }, (1000 / this.fps) * 20);
+    }
+
+    updateMouse(x, y) {
+        this.mouseX = x;
+        this.mouseY = y;
     }
 }
 

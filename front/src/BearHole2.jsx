@@ -2,11 +2,8 @@ import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Sprite } from 'react-konva';
 import animStore from './animStore';
-import PatchyIdleShadow from './PatchyIdleShadow';
 
-
-
-export default observer(({ frame }) => {
+export default observer(({ frame, show }) => {
 
     const spriteRef = useRef();
     const [image, setImage] = useState(null);
@@ -14,13 +11,15 @@ export default observer(({ frame }) => {
     // Загрузка спрайтшита
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyBody.webp';
+        // img.src = '/bearShot.webp'; // Замените на путь к вашему спрайтшиту
+        img.src = '/bearHole2.webp'; // Замените на путь к вашему спрайтшиту
+
         img.onload = () => setImage(img);
     }, []);
 
     const framesInRow = 8;
     const frameW = 500;
-    const frameH = 422;
+    const frameH = 478;
     const framesCount = 61;
 
     const animations = {
@@ -35,19 +34,19 @@ export default observer(({ frame }) => {
 
     return (
         <>
-            {image && <>
-                <PatchyIdleShadow />
+            {image && (
                 <Sprite
+                    opacity={show ? 1 : 0}
                     ref={spriteRef}
                     image={image}
                     animation="run"
                     animations={animations}
                     frameRate={animStore.fps} // Скорость анимации (кадры в секунду)
                     frameIndex={frame}
-                    x={window.innerWidth - 100 - frameW} // Центрирование по X
-                    y={window.innerHeight / 2 - (frameH / 2)} // Центрирование по Y
+                    x={100} // Центрирование по X
+                    y={window.innerHeight / 2 - 239} // Центрирование по Y
                 />
-            </>}
+            )}
         </>
     )
 })
