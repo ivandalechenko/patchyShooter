@@ -23,12 +23,12 @@ function App() {
           <Kill />
         </div>
       </div>
-      <Canvas />
+      {/* <Canvas />
       <div className='App_footer_wrapper free_img'>
         <div className='App_footer' >
           <Media />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 

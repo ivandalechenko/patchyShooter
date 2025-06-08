@@ -14,10 +14,12 @@ export default observer(() => {
     const [scaleSeven, setscaleSeven] = useState();
     const [scaleLast, setscaleLast] = useState();
 
+    const [top, settop] = useState(-25);
+
 
     useEffect(() => {
         let interval;
-        const multipliers = [.5, 0.3, .7, 0.4, .5, 0.4, 0.5, .3];
+        const multipliers = [.7, 0.7, .7, 0.4, .7, 0.4, 0.5, .3];
 
         if (shakeLine) {
             interval = setInterval(() => {
@@ -75,13 +77,13 @@ export default observer(() => {
             <path d="M120.5 318.306V512.75H99.5V318.306H120.5Z" stroke-opacity="0.1" />
             <path d="M108.429 274H111.572V513.25H108.429V274Z" fill="url(#paint19_linear_2624_78)" className="line_letterI_height line_letterI" style={{ transform: `scaleY(${scale})` }} />
             <path d="M111.072 274.5V512.75H108.929V274.5H111.072Z" stroke-opacity="0.1" />
-            <path d="M157 317.806V513.25H135V317.806H157Z" fill="url(#paint20_linear_2624_78)" className='line_letterL_width line_letterL' style={{ transform: `scaleY(${scaleSec})` }} />
+            <path d="M157 317.806V513.25H135V317.806H157Z" fill="url(#paint20_linear_2624_78)" className='line_letterL_width line_letterL' style={{ transform: `scaleY(${scaleSec}) translateY(${top / 4}px)` }} />
             <path d="M156.5 318.306V512.75H135.5V318.306H156.5Z" stroke-opacity="0.2" />
-            <path d="M144.429 274H147.572V513.25H144.429V274Z" fill="url(#paint21_linear_2624_78)" className='line_letterL_height line_letterL' style={{ transform: `scaleY(${scaleSec})` }} />
+            <path d="M144.429 274H147.572V513.25H144.429V274Z" fill="url(#paint21_linear_2624_78)" className='line_letterL_height line_letterL' style={{ transform: `scaleY(${scaleSec}) translateY(${top / 4}px)` }} />
             <path d="M147.072 274.5V512.75H144.929V274.5H147.072Z" stroke-opacity="0.2" />
-            <path d="M241 317.806V513.25H219V317.806H241Z" fill="url(#paint22_linear_2624_78)" className='line_letterSecL_width line_letterSecL' style={{ transform: `scaleY(${scaleThird})` }} />
+            <path d="M241 317.806V513.25H219V317.806H241Z" fill="url(#paint22_linear_2624_78)" className='line_letterSecL_width line_letterSecL' style={{ transform: `scaleY(${scaleThird}) translateY(${top / 4}px)` }} />
             <path d="M240.5 318.306V512.75H219.5V318.306H240.5Z" stroke-opacity="0.3" />
-            <path d="M228.429 274H231.572V513.25H228.429V274Z" fill="url(#paint23_linear_2624_78)" className='line_letterSecL_height line_letterSecL' style={{ transform: `scaleY(${scaleThird})` }} />
+            <path d="M228.429 274H231.572V513.25H228.429V274Z" fill="url(#paint23_linear_2624_78)" className='line_letterSecL_height line_letterSecL' style={{ transform: `scaleY(${scaleThird}) translateY(${top / 4}px)` }} />
             <path d="M231.072 274.5V512.75H228.929V274.5H231.072Z" stroke-opacity="0.3" />
             <path d="M450 173.168V512.999H427V173.168H450Z" fill="url(#paint24_linear_2624_78)" className='line_letterHfirst_width line_letterHfirst' style={{ transform: `scaleY(${scaleFourth})` }} />
             <path d="M449.5 173.668V512.5H427.5V173.668H449.5Z" stroke-opacity="0.4" />
@@ -99,7 +101,7 @@ export default observer(() => {
             <path d="M1371.5 163.967V512.5H1350.5V163.967H1371.5Z" stroke-opacity="0.7" />
             <path d="M1358.8 85H1362.41V513H1358.8V85Z" fill="url(#paint31_linear_2624_78)" className='line_letterK_height line_letterK' style={{ transform: `scaleY(${scaleSeven})` }} />
             <path d="M1361.91 85.5V512.5H1359.3V85.5H1361.91Z" stroke-opacity="0.7" />
-            <path d="M1541 0V491H1520V0H1541Z" fill="url(#paint32_linear_2624_78)" className='line_letterT' style={{ transform: `scaleY(${scaleLast})` }} />
+            <path d="M1541 0V491H1520V0H1541Z" fill="url(#paint32_linear_2624_78)" className='line_letterT' style={{ transform: `scaleY(${scaleLast}) translateY(${top}px)` }} />
             <path d="M1540.5 0.5V490.5H1520.5V0.5H1540.5Z" stroke-opacity="0.8" />
             <defs>
                 <linearGradient id="paint0_linear_2624_78" x1="779.5" y1="-119.416" x2="779.5" y2="514.584" gradientUnits="userSpaceOnUse">
