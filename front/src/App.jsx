@@ -57,15 +57,15 @@ function App() {
       {/* <div className='App_noise'></div> */}
       <div className='App_header_wrapper free_img'>
         <div className='App_header' >
-          {/* <Kill /> */}
+          <Kill />
         </div>
       </div>
-      {/* <Canvas />
+      <Canvas />
       <div className='App_footer_wrapper free_img'>
         <div className='App_footer' >
           <Media />
         </div>
-      </div> */}
+      </div>
     </div>
   )
 
