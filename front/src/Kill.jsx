@@ -14,10 +14,12 @@ export default observer(() => {
     const [scaleSeven, setscaleSeven] = useState();
     const [scaleLast, setscaleLast] = useState();
 
+    const [top, settop] = useState(-25);
+
 
     useEffect(() => {
         let interval;
-        const multipliers = [.5, 0.3, .7, 0.4, .5, 0.4, 0.5, .3];
+        const multipliers = [.7, 0.7, .7, 0.4, .7, 0.4, 0.5, .3];
 
         if (shakeLine) {
             interval = setInterval(() => {
@@ -52,6 +54,10 @@ export default observer(() => {
 
     return (
 
+      <>
+      <div className='Kill_svg'>
+        <img src="./line.svg" alt="" />
+      </div>
         <svg width="1559" height="515" viewBox="0 0 1559 515" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1556.91 428.183V443.631H1508.42V428.183H1556.91ZM1520.3 428.183H1540.19V487.399C1540.19 490.731 1540.93 493.205 1542.39 494.82C1543.85 496.385 1546.17 497.167 1549.35 497.167C1550.2 497.167 1551.16 497.092 1552.22 496.94C1553.28 496.789 1554.24 496.612 1555.1 496.41L1558.5 512.009C1556.38 512.666 1554.24 513.145 1552.07 513.448C1549.9 513.801 1547.73 513.978 1545.56 513.978C1537.7 513.978 1531.52 511.908 1527.03 507.769C1522.54 503.579 1520.3 497.874 1520.3 490.655V428.183Z" fill="url(#paint0_linear_2624_78)" />
             <path d="M1466.44 514.508C1457.96 514.508 1450.65 512.741 1444.5 509.208C1438.34 505.623 1433.6 500.575 1430.27 494.063C1427 487.551 1425.36 479.877 1425.36 471.043C1425.36 462.309 1427 454.661 1430.27 448.099C1433.55 441.485 1438.17 436.336 1444.12 432.651C1450.07 428.966 1457.08 427.123 1465.15 427.123C1470.34 427.123 1475.26 427.956 1479.9 429.622C1484.59 431.288 1488.73 433.862 1492.31 437.346C1495.94 440.829 1498.79 445.271 1500.86 450.673C1502.92 456.024 1503.96 462.41 1503.96 469.831V476.041H1434.66V462.637H1494.05L1484.74 466.575C1484.74 461.779 1484.01 457.614 1482.55 454.081C1481.09 450.496 1478.92 447.695 1476.04 445.675C1473.17 443.656 1469.59 442.646 1465.3 442.646C1461.01 442.646 1457.36 443.656 1454.33 445.675C1451.31 447.695 1449.01 450.421 1447.45 453.854C1445.88 457.236 1445.1 461.022 1445.1 465.212V474.526C1445.1 479.675 1445.98 484.092 1447.75 487.778C1449.57 491.412 1452.09 494.189 1455.31 496.107C1458.59 498.026 1462.4 498.985 1466.74 498.985C1469.56 498.985 1472.13 498.581 1474.45 497.773C1476.82 496.966 1478.84 495.754 1480.51 494.139C1482.22 492.473 1483.53 490.428 1484.44 488.005L1503.05 490.201C1501.84 495.098 1499.6 499.389 1496.32 503.074C1493.09 506.709 1488.93 509.536 1483.83 511.555C1478.79 513.524 1472.99 514.508 1466.44 514.508Z" fill="url(#paint1_linear_2624_78)" />
@@ -75,13 +81,13 @@ export default observer(() => {
             <path d="M120.5 318.306V512.75H99.5V318.306H120.5Z" stroke-opacity="0.1" />
             <path d="M108.429 274H111.572V513.25H108.429V274Z" fill="url(#paint19_linear_2624_78)" className="line_letterI_height line_letterI" style={{ transform: `scaleY(${scale})` }} />
             <path d="M111.072 274.5V512.75H108.929V274.5H111.072Z" stroke-opacity="0.1" />
-            <path d="M157 317.806V513.25H135V317.806H157Z" fill="url(#paint20_linear_2624_78)" className='line_letterL_width line_letterL' style={{ transform: `scaleY(${scaleSec})` }} />
+            <path d="M157 317.806V513.25H135V317.806H157Z" fill="url(#paint20_linear_2624_78)" className='line_letterL_width line_letterL' style={{ transform: `scaleY(${scaleSec}) translateY(${top / 4}px)` }} />
             <path d="M156.5 318.306V512.75H135.5V318.306H156.5Z" stroke-opacity="0.2" />
-            <path d="M144.429 274H147.572V513.25H144.429V274Z" fill="url(#paint21_linear_2624_78)" className='line_letterL_height line_letterL' style={{ transform: `scaleY(${scaleSec})` }} />
+            <path d="M144.429 274H147.572V513.25H144.429V274Z" fill="url(#paint21_linear_2624_78)" className='line_letterL_height line_letterL' style={{ transform: `scaleY(${scaleSec}) translateY(${top / 4}px)` }} />
             <path d="M147.072 274.5V512.75H144.929V274.5H147.072Z" stroke-opacity="0.2" />
-            <path d="M241 317.806V513.25H219V317.806H241Z" fill="url(#paint22_linear_2624_78)" className='line_letterSecL_width line_letterSecL' style={{ transform: `scaleY(${scaleThird})` }} />
+            <path d="M241 317.806V513.25H219V317.806H241Z" fill="url(#paint22_linear_2624_78)" className='line_letterSecL_width line_letterSecL' style={{ transform: `scaleY(${scaleThird}) translateY(${top / 4}px)` }} />
             <path d="M240.5 318.306V512.75H219.5V318.306H240.5Z" stroke-opacity="0.3" />
-            <path d="M228.429 274H231.572V513.25H228.429V274Z" fill="url(#paint23_linear_2624_78)" className='line_letterSecL_height line_letterSecL' style={{ transform: `scaleY(${scaleThird})` }} />
+            <path d="M228.429 274H231.572V513.25H228.429V274Z" fill="url(#paint23_linear_2624_78)" className='line_letterSecL_height line_letterSecL' style={{ transform: `scaleY(${scaleThird}) translateY(${top / 4}px)` }} />
             <path d="M231.072 274.5V512.75H228.929V274.5H231.072Z" stroke-opacity="0.3" />
             <path d="M450 173.168V512.999H427V173.168H450Z" fill="url(#paint24_linear_2624_78)" className='line_letterHfirst_width line_letterHfirst' style={{ transform: `scaleY(${scaleFourth})` }} />
             <path d="M449.5 173.668V512.5H427.5V173.668H449.5Z" stroke-opacity="0.4" />
@@ -99,7 +105,7 @@ export default observer(() => {
             <path d="M1371.5 163.967V512.5H1350.5V163.967H1371.5Z" stroke-opacity="0.7" />
             <path d="M1358.8 85H1362.41V513H1358.8V85Z" fill="url(#paint31_linear_2624_78)" className='line_letterK_height line_letterK' style={{ transform: `scaleY(${scaleSeven})` }} />
             <path d="M1361.91 85.5V512.5H1359.3V85.5H1361.91Z" stroke-opacity="0.7" />
-            <path d="M1541 0V491H1520V0H1541Z" fill="url(#paint32_linear_2624_78)" className='line_letterT' style={{ transform: `scaleY(${scaleLast})` }} />
+            <path d="M1541 0V491H1520V0H1541Z" fill="url(#paint32_linear_2624_78)" className='line_letterT' style={{ transform: `scaleY(${scaleLast}) translateY(${top}px)` }} />
             <path d="M1540.5 0.5V490.5H1520.5V0.5H1540.5Z" stroke-opacity="0.8" />
             <defs>
                 <linearGradient id="paint0_linear_2624_78" x1="779.5" y1="-119.416" x2="779.5" y2="514.584" gradientUnits="userSpaceOnUse">
@@ -237,7 +243,7 @@ export default observer(() => {
             </defs>
         </svg>
 
-
+  </>
 
     )
 })
