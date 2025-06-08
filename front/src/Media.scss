@@ -4,32 +4,43 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
 
     @media(max-width: 500px) {
-        gap: 30px;
+        gap: 20px;
     }
 
     img {
-        width: 50px;
-        max-height: 50px;
-        filter: drop-shadow(0px 0px 10px #0008);
+        width: 40px;
+        max-height: 40px;
 
         @media(max-width: 500px) {
-            width: 38px;
-            max-height: 38px;
+            width: 30px;
+            max-height: 30px;
         }
     }
 
     &_inactive {
-        opacity: .2;
-    }
+        // opacity: .2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding-bottom: 8px;
 
-    a {
-        transition: opacity 200ms;
-    }
+        &_soon {
+            justify-content: right !important;
+            display: none !important;
+            transition: opacity 200ms;
 
-    a:hover {
-        opacity: .6;
+            img {
+                min-width: 40px;
+            }
+        }
+
+        &_base {
+            transition: opacity 200ms;
+        }
+
     }
 }

@@ -4,7 +4,7 @@ import { makeAutoObservable } from 'mobx';
 class AnimStore {
 
     framesPerRow = 8
-    fps = 30
+    fps = 24
     framesCount = 61
     shotFramesCount = 21
     bearShotFramesCount = 21
@@ -21,12 +21,6 @@ class AnimStore {
     }
 
     shot() {
-        console.log('shot try');
-
-        if (this.shotTrigger !== 0) return
-        if (this.shotBearTrigger !== 0) return
-        console.log('shot');
-        // this.shotTrigger = Math.random()
         this.shotBearTrigger = Math.random()
     }
     shotEnd() {

@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Image as KonvaImage } from 'react-konva';
 import animStore from './animStore';
 
 export default observer(() => {
+    const imageRef = useRef(null)
     const [image, setImage] = useState(null);
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
@@ -27,14 +28,21 @@ export default observer(() => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+
+    useEffect(() => {
+        imageRef.current?.skewX(animStore.mouseX / 4);
+    }, [animStore.mouseX]);
+
+
     return image && (
         <KonvaImage
+            ref={imageRef}
             image={image}
             x={windowSize.width - 365}
             y={windowSize.height / 2 + 175}
             width={1700}
             height={1700 / 1.9}
-            skewX={animStore.mouseX / 4}
+
         />
     );
 });

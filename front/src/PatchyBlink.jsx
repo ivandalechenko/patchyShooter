@@ -1,59 +1,59 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Sprite } from 'react-konva';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { Sprite } from 'react-konva';
 import animStore from './animStore';
 
 export default observer(({ frame }) => {
-
     const spriteRef = useRef();
     const [image, setImage] = useState(null);
 
-    // Загрузка спрайтшита
+    const frameW = 500;
+    const frameH = 422;
+    const framesInRow = 8;
+    const framesCount = 61;
+
     useEffect(() => {
         const img = new window.Image();
         img.src = '/patchyBlink.webp';
         img.onload = () => setImage(img);
     }, []);
 
-    const framesInRow = 8;
-    const frameW = 500;
-    const frameH = 422;
-    const framesCount = 61;
-
-    const animations = {
-        run: [],
-    };
-
-    for (let i = 0; i < framesCount; i++) {
-        const x = (i % framesInRow) * frameW;
-        const y = Math.floor(i / framesInRow) * frameH;
-        animations.run.push(x, y, frameW, frameH);
-    }
+    const animations = useMemo(() => {
+        const run = [];
+        for (let i = 0; i < framesCount; i++) {
+            const x = (i % framesInRow) * frameW;
+            const y = Math.floor(i / framesInRow) * frameH;
+            run.push(x, y, frameW, frameH);
+        }
+        return { run };
+    }, []);
 
     useEffect(() => {
-        if (frame === 0) {
-            const randomizer = Math.random()
-            if (randomizer < .3) {
-                animStore.blink()
-            }
+        if (spriteRef.current) {
+            spriteRef.current.frameIndex(frame);
+            spriteRef.current.opacity(animStore.isBlink ? 1 : 0);
+            spriteRef.current.getLayer().batchDraw();
         }
-    }, [frame])
+    }, [frame, animStore.isBlink]);
+
+    useEffect(() => {
+        if (frame === 0 && Math.random() < 0.3) {
+            animStore.blink();
+        }
+    }, [frame]);
 
     return (
         <>
             {image && (
                 <Sprite
-                    opacity={animStore.isBlink ? 1 : 0}
                     ref={spriteRef}
                     image={image}
                     animation="run"
                     animations={animations}
-                    frameRate={animStore.fps} // Скорость анимации (кадры в секунду)
-                    frameIndex={frame}
-                    x={window.innerWidth - 100 - frameW} // Центрирование по X
-                    y={window.innerHeight / 2 - (frameH / 2)} // Центрирование по Y
+                    x={window.innerWidth - 100 - frameW}
+                    y={window.innerHeight / 2 - frameH / 2}
                 />
             )}
         </>
-    )
-})
+    );
+});
