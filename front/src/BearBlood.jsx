@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Sprite } from 'react-konva';
 import animStore from './animStore';
 
-export default observer(({ frame, show }) => {
-    const spriteRef = useRef();
+export default observer(({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
     const frameW = 500;
@@ -28,20 +27,17 @@ export default observer(({ frame, show }) => {
         return { run };
     }, []);
 
-    useEffect(() => {
-        if (spriteRef.current) {
-            spriteRef.current.frameIndex(frame);
-            spriteRef.current.getLayer().batchDraw();
-        }
-    }, [frame]);
-
+    const [y, setY] = useState(() => window.innerHeight / 2 + 90);
 
     useEffect(() => {
-        if (spriteRef.current) {
-            spriteRef.current.opacity(show ? 1 : 0);
-            spriteRef.current.getLayer().batchDraw();
-        }
-    }, [show]);
+        const handleResize = () => {
+            setY(window.innerHeight / 2 + 90);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     return (
         <>
@@ -53,7 +49,7 @@ export default observer(({ frame, show }) => {
                     animations={animations}
                     x={-80}
                     opacity={0}
-                    y={window.innerHeight / 2 + 90}
+                    y={y}
                 />
             )}
         </>

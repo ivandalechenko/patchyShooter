@@ -4,8 +4,7 @@ import { Sprite } from 'react-konva';
 import animStore from './animStore';
 import BearIdleShadow from './BearIdleShadow';
 
-export default observer(({ frame, show }) => {
-    const spriteRef = useRef();
+export default observer(({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
     const frameW = 500;
@@ -29,18 +28,19 @@ export default observer(({ frame, show }) => {
         return { run };
     }, []);
 
-    // Обновляем opacity при изменении show
-    useEffect(() => {
-        if (spriteRef.current) {
-            spriteRef.current.opacity(show ? 1 : 0);
-            spriteRef.current.getLayer().batchDraw();
-        }
-    }, [show]);
 
-    // Обновление кадра
+
+    const [y, setY] = useState(() => window.innerHeight / 2 - 239);
+
     useEffect(() => {
-        spriteRef.current?.frameIndex(frame);
-    }, [frame]);
+        const handleResize = () => {
+            setY(window.innerHeight / 2 - 239);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     return (
         <>
@@ -53,7 +53,7 @@ export default observer(({ frame, show }) => {
                         animation="run"
                         animations={animations}
                         x={100}
-                        y={window.innerHeight / 2 - 239}
+                        y={y}
                     />
                 </>
             )}

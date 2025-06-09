@@ -46,7 +46,7 @@ function App() {
       onPointerDown={() => { animStore.shot() }}
       onPointerLeave={() => {
         console.log('leave');
-        if (window.innerWidth > 800) animStore.fps = 5
+        if (window.innerWidth > 800) animStore.fps = 12
       }}
       onPointerEnter={() => {
         console.log('enter');
@@ -73,4 +73,4 @@ function App() {
 
 }
 
-export default observer(App)
+export default App

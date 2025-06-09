@@ -5,7 +5,6 @@ import animStore from './animStore';
 
 export default observer(() => {
     const [image, setImage] = useState(null);
-    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
     const imageRef = useRef(null)
 
@@ -15,23 +14,30 @@ export default observer(() => {
         img.onload = () => setImage(img);
     }, []);
 
-    useEffect(() => {
-        const handleResize = () => setWindowHeight(window.innerHeight);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
 
     useEffect(() => {
         imageRef.current?.skewX(animStore.mouseX / 4);
     }, [animStore.mouseX]);
 
 
+
+    const [y, setY] = useState(() => window.innerHeight / 2 + 195);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setY(window.innerHeight / 2 + 195);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
     return image && (
         <KonvaImage
             image={image}
             x={225}
-            y={windowHeight / 2 + 195}
+            y={y}
             width={1500}
             height={1500 / 1.9}
             ref={imageRef}

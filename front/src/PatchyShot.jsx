@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Sprite } from 'react-konva';
 import animStore from './animStore';
 
-export default observer(({ frame, show }) => {
-    const spriteRef = useRef();
+export default observer(({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
     const frameW = 500;
@@ -28,12 +27,33 @@ export default observer(({ frame, show }) => {
         return { run };
     }, []);
 
+
+
+    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+
     useEffect(() => {
-        if (spriteRef.current) {
-            spriteRef.current.frameIndex(frame);
-            spriteRef.current.getLayer().batchDraw();
-        }
-    }, [frame]);
+        const handleResize = () => {
+            setY(window.innerHeight / 2 - frameH / 2);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
+
+    const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setX(window.innerWidth - 100 - frameW);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
 
     return (
         <>
@@ -43,9 +63,8 @@ export default observer(({ frame, show }) => {
                     image={image}
                     animation="run"
                     animations={animations}
-                    x={window.innerWidth - 100 - frameW}
-                    y={window.innerHeight / 2 - frameH / 2}
-                    opacity={show ? 1 : 0}
+                    x={x}
+                    y={y}
                 />
             )}
         </>
