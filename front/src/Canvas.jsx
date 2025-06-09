@@ -241,12 +241,12 @@ const SpriteAnimation = ({ shotTrigger }) => {
                         <Group x={bearX}>
                             <BearIdle spriteRef={bearIdleRef} />
                             <BearShot spriteRef={bearShotRef} />
-                            <BearBlood spriteRef={bloodRef} />
                         </Group>
                     </Layer>
 
                     <Layer y={window.innerHeight / 8}>
                         <Group x={bearX}>
+                            <BearBlood spriteRef={bloodRef} />
                             <BearHole1 spriteRef={hole1Ref} />
                             <BearHole2 spriteRef={hole2Ref} />
                         </Group>
