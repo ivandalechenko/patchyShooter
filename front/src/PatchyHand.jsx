@@ -1,8 +1,7 @@
-import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Sprite } from 'react-konva';
 
-export default observer(({ spriteRef }) => {
+export default (({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
     const frameW = 500;

@@ -4,7 +4,7 @@ import './App.scss';
 import Canvas from './Canvas';
 import Kill from './Kill';
 import Media from './Media';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function App() {
@@ -39,18 +39,13 @@ function App() {
     };
   }, []);
 
+  const [shotTrigger, setshotTrigger] = useState(0);
 
 
   return (
     <div className='App'
-      onPointerDown={() => { animStore.shot() }}
-      onPointerLeave={() => {
-        console.log('leave');
-        if (window.innerWidth > 800) animStore.fps = 12
-      }}
-      onPointerEnter={() => {
-        console.log('enter');
-        animStore.fps = 24
+      onPointerDown={() => {
+        setshotTrigger(Math.random())
       }}
 
     >
@@ -61,7 +56,7 @@ function App() {
         </div>
       </div>
       <div className='App_canvas'>
-        <Canvas />
+        <Canvas shotTrigger={shotTrigger} />
       </div>
       <div className='App_footer_wrapper free_img'>
         <div className='App_footer' >

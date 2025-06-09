@@ -2,10 +2,6 @@ import { makeAutoObservable } from 'mobx';
 
 
 class AnimStore {
-    fps = 24
-
-    shotTrigger = 0;
-
     mouseX = 0;
     mouseY = 0;
 
@@ -13,12 +9,6 @@ class AnimStore {
         makeAutoObservable(this);
     }
 
-    shot() {
-        this.shotTrigger = Math.random()
-    }
-    offShotTrigger() {
-        this.shotTrigger = 0
-    }
 
     updateMouse(x, y) {
         this.mouseX = x;

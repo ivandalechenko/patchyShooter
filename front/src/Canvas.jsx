@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Group } from 'react-konva';
-import { observer } from 'mobx-react-lite';
-import animStore from './animStore';
 
 import BearIdle from './BearIdle';
 import BearShot from './BearShot';
@@ -28,8 +26,14 @@ const holeFramesCount = 21
 const bloodFramesCount = 21
 
 
-const SpriteAnimation = () => {
-    const timeout = useRef(null)
+const FPS = 24
+
+
+const SpriteAnimation = ({ shotTrigger }) => {
+    const lastShotTrigger = useRef(null)
+
+    const patchyMobRef = useRef(null)
+    const patchyMobBlinkRef = useRef(null)
 
     const bearIdleRef = useRef(null)
     const bearIdleFrame = useRef(null)
@@ -58,14 +62,62 @@ const SpriteAnimation = () => {
 
     const patchyBlinkRef = useRef(null)
 
+    useEffect(() => {
+        if (shotTrigger && shotTrigger !== lastShotTrigger.current) {
+            lastShotTrigger.current = shotTrigger
+            patchyHandShotFrame.current = 0
+            console.log('shot');
+
+            setTimeout(() => {
+                bearShotFrame.current = 0
+                setTimeout(() => {
+
+                    if (Math.random() > .5) {
+                        hole1Frame.current = 0
+                        hole2Frame.current = -1
+                    } else {
+                        hole2Frame.current = 0
+                        hole1Frame.current = -1
+                    }
+                }, 40);
+                setTimeout(() => {
+                    bloodFrame.current = 0
+                }, 400);
+            }, 200);
+        }
+    }, [shotTrigger])
+
 
     useEffect(() => {
+
+
+        let last = performance.now();
+        let acc = 0;
+        let frameId;
+
+        const run = (time) => {
+            const delta = time - last;
+            acc += delta;
+            last = time;
+
+            if (acc >= 1000 / FPS) {
+                acc = 0;
+                // вызов runFrame как раньше
+                runFrame();
+            }
+
+            frameId = requestAnimationFrame(run);
+        };
+
+        frameId = requestAnimationFrame(run);
+
+
 
         bearShotFrame.current = -1
         patchyHandShotFrame.current = -1
         hole1Frame.current = -1
         hole2Frame.current = -1
-
+        lastShotTrigger.current = 0
         const runFrame = () => {
 
             // добавляем все кадры
@@ -99,30 +151,21 @@ const SpriteAnimation = () => {
 
 
             // триггер анимки запускает нулевой кадр
-            if (animStore.shotTrigger) {
-                bearShotFrame.current = 0
-                patchyHandShotFrame.current = 0
-                if (Math.random() > .5) {
-                    hole1Frame.current = 0
-                    hole2Frame.current = -1
-                } else {
-                    hole2Frame.current = 0
-                    hole1Frame.current = -1
-                }
-                bloodFrame.current = 0
-                animStore.offShotTrigger()
-            }
+
 
             // тут менять перещёлкивать кадры
             patchyHeadRef.current?.frameIndex(patchyHeadFrame.current)
             patchyBodyRef.current?.frameIndex(patchyHeadFrame.current)
             patchyHandIdleRef.current?.frameIndex(patchyHandIdleFrame.current)
             patchyHandShotRef.current?.frameIndex(patchyHandShotFrame.current)
+            patchyMobRef.current?.frameIndex(patchyHeadFrame.current)
 
             if (patchyHeadFrame.current === 0) {
-                if (patchyBlinkRef.current) patchyBlinkRef.current.opacity(Math.random() < .7 ? 1 : 0.01);
+                if (patchyBlinkRef.current) patchyBlinkRef.current.opacity(Math.random() < .7 ? 1 : 0);
+                if (patchyMobBlinkRef.current) patchyMobBlinkRef.current.opacity(Math.random() < .7 ? 1 : 0);
             }
             patchyBlinkRef.current?.frameIndex(patchyHeadFrame.current)
+            patchyMobBlinkRef.current?.frameIndex(patchyHeadFrame.current)
 
             bearIdleRef.current?.frameIndex(bearIdleFrame.current);
             bearShotRef.current?.frameIndex(bearShotFrame.current);
@@ -130,28 +173,26 @@ const SpriteAnimation = () => {
             hole2Ref.current?.frameIndex(hole2Frame.current);
             bloodRef.current?.frameIndex(bloodFrame.current);
 
-            if (bearIdleRef.current) bearIdleRef.current.opacity(bearShotFrame.current >= 0 ? 0.01 : 1);
-            if (bearShotRef.current) bearShotRef.current.opacity(bearShotFrame.current >= 0 ? 1 : 0.01);
-            if (hole1Ref.current) hole1Ref.current.opacity(hole1Frame.current >= 0 ? 1 : 0.01);
-            if (hole2Ref.current) hole2Ref.current.opacity(hole2Frame.current >= 0 ? 1 : 0.01);
-            if (bloodRef.current) bloodRef.current.opacity(bloodFrame.current >= 0 ? 1 : 0.01);
+            if (bearIdleRef.current) bearIdleRef.current.opacity(bearShotFrame.current >= 0 ? 0 : 1);
+            if (bearShotRef.current) bearShotRef.current.opacity(bearShotFrame.current >= 0 ? 1 : 0);
+            if (hole1Ref.current) hole1Ref.current.opacity(hole1Frame.current >= 0 ? 1 : 0);
+            if (hole2Ref.current) hole2Ref.current.opacity(hole2Frame.current >= 0 ? 1 : 0);
+            if (bloodRef.current) bloodRef.current.opacity(bloodFrame.current >= 0 ? 1 : 0);
 
-            if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(patchyHandShotFrame.current >= 0 ? 0.01 : 1);
-            if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(patchyHandShotFrame.current >= 0 ? 1 : 0.01);
+            if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(patchyHandShotFrame.current >= 0 ? 0 : 1);
+            if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(patchyHandShotFrame.current >= 0 ? 1 : 0);
 
 
             bearIdleRef.current?.getLayer()?.batchDraw();
             patchyHeadRef.current?.getLayer()?.batchDraw();
-
-            timeout.current = setTimeout(runFrame, 1000 / animStore.fps);
+            hole1Ref.current?.getLayer()?.batchDraw();
+            // timeout.current = setTimeout(runFrame, 1000 / animStore.fps);
             // console.log(`FRAME: bearIdle: ${bearIdleFrame.current} patchyHeadFrame: ${patchyHeadFrame.current}`);
         };
 
-        runFrame();
 
-        return () => {
-            clearTimeout(timeout.current);
-        };
+        return () => cancelAnimationFrame(frameId);
+
     }, [])
 
 
@@ -200,9 +241,14 @@ const SpriteAnimation = () => {
                         <Group x={bearX}>
                             <BearIdle spriteRef={bearIdleRef} />
                             <BearShot spriteRef={bearShotRef} />
+                            <BearBlood spriteRef={bloodRef} />
+                        </Group>
+                    </Layer>
+
+                    <Layer y={window.innerHeight / 8}>
+                        <Group x={bearX}>
                             <BearHole1 spriteRef={hole1Ref} />
                             <BearHole2 spriteRef={hole2Ref} />
-                            <BearBlood spriteRef={bloodRef} />
                         </Group>
                     </Layer>
 
@@ -221,12 +267,12 @@ const SpriteAnimation = () => {
             )}
             {window.innerWidth <= 800 &&
                 <Layer>
-                    <PatchyMob frame={currentFrame} />
-                    <PatchyMobBlink frame={currentFrame} />
+                    <PatchyMob spriteRef={patchyMobRef} />
+                    <PatchyMobBlink spriteRef={patchyMobBlinkRef} />
                 </Layer>
             }
         </Stage>
     );
 };
 
-export default observer(SpriteAnimation);
+export default SpriteAnimation;
