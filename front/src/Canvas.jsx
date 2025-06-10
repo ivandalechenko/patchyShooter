@@ -67,7 +67,9 @@ const SpriteAnimation = ({ shotTrigger }) => {
     const patchyBlinkLeftRef = useRef(null)
     const patchyBlinkRightRef = useRef(null)
 
-    const [oldBlood, setoldBlood] = useState(false);
+    const oldBloodCount = useRef(null)
+    const [oldBlood, setoldBlood] = useState(0);
+
 
     useEffect(() => {
         if (shotTrigger && shotTrigger !== lastShotTrigger.current) {
@@ -86,9 +88,23 @@ const SpriteAnimation = ({ shotTrigger }) => {
                 }
                 setTimeout(() => {
                     bloodFrame.current = 0
+
+                    const frameW = 396;
+                    const frameH = 146;
+                    const getX = () => window.innerWidth - (window.innerWidth - frameW / 2) - frameW;
+                    const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH - frameH / 3) - frameH;
+
+                    oldBloodCount.current = Math.min(oldBloodCount.current + 1, 3);
+                    if (bloodRef.current) {
+                        bloodRef.current.x(getX() + [0, -100, 0][oldBloodCount.current - 1])
+                        bloodRef.current.y(getY() + [0, 300, -500][oldBloodCount.current - 1])
+                        bloodRef.current.rotation([0, -25, 40][oldBloodCount.current - 1])
+                        console.log(bloodRef.current);
+                    }
+
                     setTimeout(() => {
-                        setoldBlood(true)
-                    }, 500);
+                        setoldBlood(oldBloodCount.current)
+                    }, 200);
                 }, 400);
             }, 200);
         }
@@ -119,7 +135,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
         frameId = requestAnimationFrame(run);
 
 
-
+        oldBloodCount.current = 0
         bearShotFrame.current = -1
         bloodFrame.current = -1
         patchyHandShotFrame.current = -1

@@ -15,7 +15,7 @@ export default (({ spriteRef }) => {
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyHead.webp';
+        img.src = '/patchyHead2.webp';
         img.onload = () => setImage(img);
     }, []);
 

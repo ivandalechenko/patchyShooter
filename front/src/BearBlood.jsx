@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Sprite } from 'react-konva';
 import { Image as KonvaImage } from 'react-konva';
 
-export default (({ spriteRef, oldBlood }) => {
+export default (({ spriteRef, oldBlood, newBlood }) => {
     const [image, setImage] = useState(null);
 
     const frameW = 396;
@@ -49,7 +49,6 @@ export default (({ spriteRef, oldBlood }) => {
 
 
     const [imgBloodOld, setimgBloodOld] = useState(null);
-    const imageRef = useRef(null)
     useEffect(() => {
         const img = new window.Image();
         img.src = '/bloodEl.webp';
@@ -61,13 +60,31 @@ export default (({ spriteRef, oldBlood }) => {
 
     return (
         <>
-            {oldBlood && imgBloodOld &&
+            {oldBlood > 0 && imgBloodOld &&
                 <KonvaImage
                     image={imgBloodOld}
                     x={x}
                     y={y}
                     opacity={1}
-                    ref={imageRef}
+                />
+            }
+            {oldBlood > 1 && imgBloodOld &&
+                <KonvaImage
+                    image={imgBloodOld}
+                    x={x - 100}
+                    y={y + 300}
+                    rotation={-25}
+                    opacity={1}
+                />
+            }
+            {/* {oldBlood > 2 && imgBloodOld && */}
+            {oldBlood > 2 && imgBloodOld &&
+                <KonvaImage
+                    image={imgBloodOld}
+                    x={x}
+                    y={y - 500}
+                    rotation={40}
+                    opacity={1}
                 />
             }
             {image && (
@@ -76,9 +93,12 @@ export default (({ spriteRef, oldBlood }) => {
                     image={image}
                     animation="run"
                     animations={animations}
-                    // x={-150}
+                    // x={x + [0, -100, 0][newBlood - 1]}
+                    // y={y + [0, 300, -500][newBlood - 1]}
+                    // rotation={[0, -25, 40][newBlood - 1]}
                     x={x}
                     y={y}
+                    // rotation={[0, -25, 40][newBlood - 1]}
                     opacity={0}
                 />
             )}

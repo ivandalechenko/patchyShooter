@@ -12,7 +12,7 @@ export default (({ spriteRef }) => {
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyBody.webp';
+        img.src = '/patchyBody2.webp';
         img.onload = () => setImage(img);
     }, []);
 

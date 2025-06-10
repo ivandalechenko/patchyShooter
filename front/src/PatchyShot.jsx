@@ -11,7 +11,7 @@ export default (({ spriteRef }) => {
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyHandShot.webp';
+        img.src = '/patchyHandShot2.webp';
         img.onload = () => setImage(img);
     }, []);
 
@@ -30,7 +30,7 @@ export default (({ spriteRef }) => {
     // const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
     const getX = () => window.innerWidth - 325 - frameW;
     const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH / 7 + 10) - frameH;
-    
+
     const [x, setX] = useState(() => getX());
     const [y, setY] = useState(() => getY());
 
