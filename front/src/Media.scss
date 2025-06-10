@@ -42,6 +42,14 @@
         &_base {
             transition: opacity 200ms;
         }
-
     }
+
+    a {
+        transition: transform 500ms;
+    }
+
+    a:hover {
+        transform: scale(1.2);
+    }
+
 }

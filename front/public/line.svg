@@ -1,5 +1,21 @@
 <svg width="1687" height="506" viewBox="0 0 1687 506" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+#chart{
+  animation: chartAnim 1s infinite linear;
+}
+
+@keyframes chartAnim{
+  0%{
+  transform: translate(0px, 0px);
+  }
+  100%{
+  transform: translate(-71px, 0px);
+  }
+}
+</style>
+
 <mask id="mask0_2632_1052" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="-253" width="1809" height="759">
+<g id='chart'>
 <line x1="1809" y1="42.873" y2="42.873" stroke="black"/>
 <line x1="1809" y1="101.947" y2="101.947" stroke="black"/>
 <line x1="1809" y1="161.021" y2="161.021" stroke="black"/>
@@ -31,13 +47,12 @@
 <line x1="1500.17" y1="-253" x2="1500.17" y2="505.582" stroke="black"/>
 <line x1="1573.07" y1="-253" x2="1573.07" y2="505.582" stroke="black"/>
 <line x1="1645.98" y1="-253" x2="1645.98" y2="505.582" stroke="black"/>
+</g>
 </mask>
 <g mask="url(#mask0_2632_1052)">
-<!-- <rect x="22.4844" y="-243.062" width="1358.62" height="767.968" fill="url(#paint0_radial_2632_1052)"/> -->
 <rect x="0" y="-300" width="1800" height="1000" fill="url(#paint0_radial_2632_1052)" />
 </g>
 <defs>
-<!-- <radialGradient id="paint0_radial_2632_1052" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(693.552 -17.8686) rotate(-88.6692) scale(354.46 550.349)"> -->
 <radialGradient
   id="paint0_radial_2632_1052"
   cx="0" cy="0" r="1"

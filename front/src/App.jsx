@@ -4,7 +4,7 @@ import './App.scss';
 import Canvas from './Canvas';
 import Kill from './Kill';
 import Media from './Media';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 
 function App() {
@@ -40,11 +40,15 @@ function App() {
   }, []);
 
   const [shotTrigger, setshotTrigger] = useState(0);
+  const lastShot = useRef(null);
 
 
   return (
     <div className='App'
       onPointerDown={() => {
+        const now = Date.now(); // время в миллисекундах с 1 января 1970
+        if (now - lastShot.current < 500) return
+        lastShot.current = now;
         setshotTrigger(Math.random())
       }}
 

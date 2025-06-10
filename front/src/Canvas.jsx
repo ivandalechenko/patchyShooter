@@ -26,7 +26,7 @@ const bearIdleFramesCount = 61
 const patchyShotFramesCount = 21
 const bearShotFramesCount = 21
 const holeFramesCount = 21
-const bloodFramesCount = 21
+const bloodFramesCount = 35
 
 
 const FPS = 20
@@ -67,6 +67,8 @@ const SpriteAnimation = ({ shotTrigger }) => {
     const patchyBlinkLeftRef = useRef(null)
     const patchyBlinkRightRef = useRef(null)
 
+    const [oldBlood, setoldBlood] = useState(false);
+
     useEffect(() => {
         if (shotTrigger && shotTrigger !== lastShotTrigger.current) {
             lastShotTrigger.current = shotTrigger
@@ -84,6 +86,9 @@ const SpriteAnimation = ({ shotTrigger }) => {
                 }
                 setTimeout(() => {
                     bloodFrame.current = 0
+                    setTimeout(() => {
+                        setoldBlood(true)
+                    }, 500);
                 }, 400);
             }, 200);
         }
@@ -116,6 +121,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
 
         bearShotFrame.current = -1
+        bloodFrame.current = -1
         patchyHandShotFrame.current = -1
         hole1Frame.current = -1
         hole2Frame.current = -1
@@ -168,7 +174,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
                 if (patchyMobBlinkRef.current) patchyMobBlinkRef.current.opacity(Math.random() < .7 ? 1 : 0);
             }
             patchyBlinkLeftRef.current?.frameIndex(patchyHeadFrame.current)
-            patchyBlinkRightRef.current?.frameIndex(patchyHeadFrame.current)
+            patchyBlinkRightRef.current?.frameIndex(patchyHeadFrame.current - 2)
             patchyMobBlinkRef.current?.frameIndex(patchyHeadFrame.current)
 
             bearIdleRef.current?.frameIndex(bearIdleFrame.current);
@@ -253,6 +259,9 @@ const SpriteAnimation = ({ shotTrigger }) => {
     }, []);
 
 
+
+
+
     return (
         <Stage width={canvasWidth} height={canvasHeight}>
             {/* Bear Layer */}
@@ -267,9 +276,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
                     <Layer y={window.innerHeight / 8}>
                         <Group x={bearX}>
-                            {/* Position */}
-                            <BearBlood spriteRef={bloodRef} />
-                            {/*  */}
+                            <BearBlood spriteRef={bloodRef} oldBlood={oldBlood} />
                             <BearHole1 spriteRef={hole1Ref} />
                             <BearHole2 spriteRef={hole2Ref} />
                         </Group>

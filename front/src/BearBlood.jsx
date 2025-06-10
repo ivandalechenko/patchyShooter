@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Sprite } from 'react-konva';
+import { Image as KonvaImage } from 'react-konva';
 
-export default (({ spriteRef }) => {
+export default (({ spriteRef, oldBlood }) => {
     const [image, setImage] = useState(null);
-
-    // const frameW = 500;
-    // const frameH = 218;
-    // const framesInRow = 8;
-    // const framesCount = 21;
 
     const frameW = 396;
     const frameH = 146;
@@ -32,7 +28,7 @@ export default (({ spriteRef }) => {
 
     // const [y, setY] = useState(() => window.innerHeight / 2 + 90);
 
-    const getX = () => window.innerWidth - (window.innerWidth - frameW /2) - frameW;
+    const getX = () => window.innerWidth - (window.innerWidth - frameW / 2) - frameW;
     const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH - frameH / 3) - frameH;
 
     const [x, setX] = useState(() => getX());
@@ -50,8 +46,30 @@ export default (({ spriteRef }) => {
     }, []);
 
 
+
+
+    const [imgBloodOld, setimgBloodOld] = useState(null);
+    const imageRef = useRef(null)
+    useEffect(() => {
+        const img = new window.Image();
+        img.src = '/bloodEl.webp';
+        img.onload = () => setimgBloodOld(img);
+    }, []);
+
+
+
+
     return (
         <>
+            {oldBlood && imgBloodOld &&
+                <KonvaImage
+                    image={imgBloodOld}
+                    x={x}
+                    y={y}
+                    opacity={1}
+                    ref={imageRef}
+                />
+            }
             {image && (
                 <Sprite
                     ref={spriteRef}
@@ -60,10 +78,12 @@ export default (({ spriteRef }) => {
                     animations={animations}
                     // x={-150}
                     x={x}
-                    opacity={0}
                     y={y}
+                    opacity={0}
                 />
             )}
+
+
         </>
     );
 });
