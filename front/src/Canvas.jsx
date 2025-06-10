@@ -94,7 +94,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
                     const getX = () => window.innerWidth - (window.innerWidth - frameW / 2) - frameW;
                     const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH - frameH / 3) - frameH;
 
-                    oldBloodCount.current = Math.min(oldBloodCount.current + 1, 3);
+                    oldBloodCount.current = Math.min(oldBloodCount.current + 1, 2);
                     if (bloodRef.current) {
                         bloodRef.current.x(getX() + [0, -100, 0][oldBloodCount.current - 1])
                         bloodRef.current.y(getY() + [0, 300, -500][oldBloodCount.current - 1])
