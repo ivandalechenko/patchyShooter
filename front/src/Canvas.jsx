@@ -254,7 +254,9 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
                     <Layer y={window.innerHeight / 8}>
                         <Group x={bearX}>
-                            {/* <BearBlood spriteRef={bloodRef} /> */}
+                            {/* Position */}
+                            <BearBlood spriteRef={bloodRef} /> 
+                            {/*  */}
                             <BearHole1 spriteRef={hole1Ref} />
                             <BearHole2 spriteRef={hole2Ref} />
                         </Group>
@@ -263,13 +265,15 @@ const SpriteAnimation = ({ shotTrigger }) => {
                     <Layer y={window.innerHeight / 8}>
                         <Group x={patchyX} y={patchyY}>
                             <PatchyBody spriteRef={patchyHeadRef} />
-
+                            {/* Position done */}
                             <PatchyHead spriteRef={patchyBodyRef} />
-                            {/* 
+                            {/*  */}
                             <PatchyHand spriteRef={patchyHandIdleRef} />
+                            {/* Position */}
                             <PatchyShot spriteRef={patchyHandShotRef} />
-                            <PatchyBlink spriteRef={patchyBlinkRef} /> 
-                            */}
+                            {/*  */}
+                            {/* <PatchyBlink spriteRef={patchyBlinkRef} /> тут нет секвенции */}
+                           
                         </Group>
                     </Layer>
 

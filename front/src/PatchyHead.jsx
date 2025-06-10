@@ -4,9 +4,13 @@ import { Sprite } from 'react-konva';
 export default (({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
-    const frameW = 500;
-    const frameH = 422;
-    const framesInRow = 8;
+    // const frameW = 500;
+    // const frameH = 422;
+    // const framesInRow = 8;
+    // const framesCount = 61;
+    const frameW = 267;
+    const frameH = 191;
+    const framesInRow = 14;
     const framesCount = 61;
 
     useEffect(() => {
@@ -25,29 +29,33 @@ export default (({ spriteRef }) => {
         return { run };
     }, []);
 
-    const getX = () => window.innerWidth - 100 - frameW
+    // const getX = () => window.innerWidth - 100 - frameW
+
+    const getX = () => window.innerWidth - 150 - frameW;
+    const getY = () => window.innerHeight - (window.innerHeight / 2 + 20) - frameH;
 
     const [x, setX] = useState(() => getX());
-    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+    const [y, setY] = useState(() => getY());
 
 
     useEffect(() => {
         const handleResize = () => {
             setX(getX());
+            setY(getY());
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setY(window.innerHeight / 2 - frameH / 2);
-        };
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         setY(window.innerHeight / 2 - frameH / 2);
+    //     };
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    //     window.addEventListener('resize', handleResize);
+    //     return () => window.removeEventListener('resize', handleResize);
+    // }, []);
 
 
 

@@ -8,7 +8,12 @@ const sharp = require('sharp');
 // const inputDir = './bearHole2';
 // const inputDir = './bearIdle';
 // const inputDir = './patchyBody';
-const inputDir = './patchyHead';
+// const inputDir = './patchyHead';
+// const inputDir = './bearBlood';
+// const inputDir = './patchyHandIdle';
+// const inputDir = './patchyHandShot';
+
+
 const outputDir = './cropped';
 const webpQuality = 80;
 const maxSpriteWidth = 4000;

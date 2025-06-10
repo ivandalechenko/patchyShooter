@@ -4,14 +4,14 @@ import { Sprite } from 'react-konva';
 export default (({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
-    const frameW = 500;
-    const frameH = 422;
-    const framesInRow = 8;
-    const framesCount = 61;
+    const frameW = 262;
+    const frameH = 197;
+    const framesInRow = 15;
+    const framesCount = 31;
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyShot.webp';
+        img.src = '/patchyHandShot.webp';
         img.onload = () => setImage(img);
     }, []);
 
@@ -27,31 +27,23 @@ export default (({ spriteRef }) => {
 
 
 
-    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+    // const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+    const getX = () => window.innerWidth - 320 - frameW;
+    const getY = () => window.innerHeight - 442 - frameH;
+    
+    const [x, setX] = useState(() => getX());
+    const [y, setY] = useState(() => getY());
 
     useEffect(() => {
         const handleResize = () => {
-            setY(window.innerHeight / 2 - frameH / 2);
+            // setY(window.innerHeight / 2 - frameH / 2);
+            setX(getX())
+            setY(getY())
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-
-
-    const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setX(window.innerWidth - 100 - frameW);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-
 
     return (
         <>

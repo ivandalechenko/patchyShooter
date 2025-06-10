@@ -4,14 +4,19 @@ import { Sprite } from 'react-konva';
 export default (({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
-    const frameW = 500;
-    const frameH = 422;
-    const framesInRow = 8;
-    const framesCount = 61;
+    // const frameW = 500;
+    // const frameH = 422;
+    // const framesInRow = 8;
+    // const framesCount = 61;
+
+    const frameW = 247;
+    const frameH = 147;
+    const framesInRow = 16;
+    const framesCount = 64;
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/patchyHand.webp';
+        img.src = '/patchyHandIdle.webp';
         img.onload = () => setImage(img);
     }, []);
 
@@ -28,27 +33,35 @@ export default (({ spriteRef }) => {
 
 
 
-    const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
+    // const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
+
+    const getX = () => window.innerWidth - 320 - frameW;
+    const getY = () => window.innerHeight - 442 - frameH;
+    
+    const [x, setX] = useState(() => getX());
+    const [y, setY] = useState(() => getY());
 
     useEffect(() => {
         const handleResize = () => {
-            setX(window.innerWidth - 100 - frameW);
+            // setX(window.innerWidth - 100 - frameW);
+            setX(getX())
+            setY(getY())
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+    // const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setY(window.innerHeight / 2 - frameH / 2);
-        };
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         setY(window.innerHeight / 2 - frameH / 2);
+    //     };
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    //     window.addEventListener('resize', handleResize);
+    //     return () => window.removeEventListener('resize', handleResize);
+    // }, []);
 
 
 
