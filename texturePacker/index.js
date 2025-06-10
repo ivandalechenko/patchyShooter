@@ -12,6 +12,7 @@ const sharp = require('sharp');
 // const inputDir = './bearBlood';
 // const inputDir = './patchyHandIdle';
 // const inputDir = './patchyHandShot';
+const inputDir = './patchyBlink';
 
 
 const outputDir = './cropped';
