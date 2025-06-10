@@ -25,13 +25,15 @@ export default (({ spriteRef }) => {
         return { run };
     }, []);
 
+    const getX = () => window.innerWidth - 100 - frameW
 
-    const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
+    const [x, setX] = useState(() => getX());
     const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+
 
     useEffect(() => {
         const handleResize = () => {
-            setX(window.innerWidth - 100 - frameW);
+            setX(getX());
         };
 
         window.addEventListener('resize', handleResize);
