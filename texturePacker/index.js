@@ -14,6 +14,7 @@ const sharp = require('sharp');
 // const inputDir = './patchyHandShot';
 // const inputDir = './patchyBlink';
 const inputDir = './patchyBlinkRight';
+// const inputDir = './patchyBlinkLeft';
 
 
 const outputDir = './cropped';
