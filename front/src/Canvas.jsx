@@ -188,11 +188,11 @@ const SpriteAnimation = ({ shotTrigger }) => {
             // НИЖЕ ОТЛАДОЧНОЕ
             // console.log(`${bearIdleFrame.current}`);
 
-            const frm = 0
-            patchyBodyRef.current?.frameIndex(frm);
-            patchyHandShotRef.current?.frameIndex(frm);
-            if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(0);
-            if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(1);
+            // const frm = 0
+            // patchyBodyRef.current?.frameIndex(frm);
+            // patchyHandShotRef.current?.frameIndex(frm);
+            // if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(1);
+            // if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(0);
             // hole2Ref.current?.frameIndex(frm);
             // bearShotRef.current?.frameIndex(frm);
             // if (bearShotRef.current) bearShotRef.current.opacity(1);
@@ -266,7 +266,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
                         <Group x={patchyX} y={patchyY}>
                             <PatchyBody spriteRef={patchyBodyRef} />
                             {/* Position done */}
-                            {/* <PatchyHead spriteRef={patchyHeadRef} /> */}
+                            <PatchyHead spriteRef={patchyHeadRef} />
                             {/*  */}
                             <PatchyHand spriteRef={patchyHandIdleRef} />
                             {/* Position */}

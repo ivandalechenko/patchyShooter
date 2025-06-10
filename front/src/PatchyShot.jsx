@@ -28,8 +28,8 @@ export default (({ spriteRef }) => {
 
 
     // const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
-    const getX = () => window.innerWidth - 320 - frameW;
-    const getY = () => window.innerHeight - 442 - frameH;
+    const getX = () => window.innerWidth - 325 - frameW;
+    const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH / 7 + 10) - frameH;
     
     const [x, setX] = useState(() => getX());
     const [y, setY] = useState(() => getY());

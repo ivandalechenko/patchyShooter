@@ -25,22 +25,17 @@ export default (({ spriteRef }) => {
         return { run };
     }, []);
 
+    const getX = () => window.innerWidth - 75 - frameW;
+    const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH / 2.2) - frameH;
+    
+    const [x, setX] = useState(() => getX());
+    const [y, setY] = useState(() => getY());
 
-    const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
+
     useEffect(() => {
         const handleResize = () => {
-            setX(window.innerWidth - 100 - frameW);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-
-    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
-    useEffect(() => {
-        const handleResize = () => {
-            setY(window.innerHeight / 2 - frameH / 2);
+            setX(getX());
+            setY(getY());
         };
 
         window.addEventListener('resize', handleResize);
