@@ -188,13 +188,13 @@ const SpriteAnimation = ({ shotTrigger }) => {
             // НИЖЕ ОТЛАДОЧНОЕ
             // console.log(`${bearIdleFrame.current}`);
 
-            // const frm = 10
-
+            const frm = 0
+            patchyBodyRef.current?.frameIndex(frm);
+            patchyHandShotRef.current?.frameIndex(frm);
+            if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(0);
+            if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(1);
             // hole2Ref.current?.frameIndex(frm);
             // bearShotRef.current?.frameIndex(frm);
-            // bearIdleRef.current?.frameIndex(frm);
-            // if (hole2Ref.current) hole2Ref.current.opacity(1);
-            // if (bearIdleRef.current) bearIdleRef.current.opacity(0);
             // if (bearShotRef.current) bearShotRef.current.opacity(1);
         };
 
@@ -255,7 +255,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
                     <Layer y={window.innerHeight / 8}>
                         <Group x={bearX}>
                             {/* Position */}
-                            <BearBlood spriteRef={bloodRef} /> 
+                            <BearBlood spriteRef={bloodRef} />
                             {/*  */}
                             <BearHole1 spriteRef={hole1Ref} />
                             <BearHole2 spriteRef={hole2Ref} />
@@ -264,16 +264,16 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
                     <Layer y={window.innerHeight / 8}>
                         <Group x={patchyX} y={patchyY}>
-                            <PatchyBody spriteRef={patchyHeadRef} />
+                            <PatchyBody spriteRef={patchyBodyRef} />
                             {/* Position done */}
-                            <PatchyHead spriteRef={patchyBodyRef} />
+                            {/* <PatchyHead spriteRef={patchyHeadRef} /> */}
                             {/*  */}
                             <PatchyHand spriteRef={patchyHandIdleRef} />
                             {/* Position */}
                             <PatchyShot spriteRef={patchyHandShotRef} />
                             {/*  */}
-                            {/* <PatchyBlink spriteRef={patchyBlinkRef} /> тут нет секвенции */}
-                           
+                            <PatchyBlink spriteRef={patchyBlinkRef} />
+
                         </Group>
                     </Layer>
 
