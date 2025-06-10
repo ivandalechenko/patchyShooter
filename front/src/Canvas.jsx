@@ -14,6 +14,9 @@ import PatchyBlink from './PatchyBlink';
 import PatchyShot from './PatchyShot';
 import PatchyMob from './PatchyMob';
 import PatchyMobBlink from './PatchyMobBlink';
+import PatchyBlinkLeft from './PatchyBlinkLeft';
+import PatchyBlinkRight from './PatchyBlinkRight';
+
 
 
 
@@ -60,7 +63,9 @@ const SpriteAnimation = ({ shotTrigger }) => {
     const patchyHandShotRef = useRef(null)
     const patchyHandShotFrame = useRef(null)
 
-    const patchyBlinkRef = useRef(null)
+    // const patchyBlinkRef = useRef(null)
+    const patchyBlinkLeftRef = useRef(null)
+    const patchyBlinkRightRef = useRef(null)
 
     useEffect(() => {
         if (shotTrigger && shotTrigger !== lastShotTrigger.current) {
@@ -158,10 +163,12 @@ const SpriteAnimation = ({ shotTrigger }) => {
             patchyMobRef.current?.frameIndex(patchyHeadFrame.current)
 
             if (patchyHeadFrame.current === 0) {
-                if (patchyBlinkRef.current) patchyBlinkRef.current.opacity(Math.random() < .7 ? 1 : 0);
+                if (patchyBlinkLeftRef.current) patchyBlinkLeftRef.current.opacity(Math.random() < .7 ? 1 : 0);
+                if (patchyBlinkRightRef.current) patchyBlinkRightRef.current.opacity(Math.random() < .7 ? 1 : 0);
                 if (patchyMobBlinkRef.current) patchyMobBlinkRef.current.opacity(Math.random() < .7 ? 1 : 0);
             }
-            patchyBlinkRef.current?.frameIndex(patchyHeadFrame.current)
+            patchyBlinkLeftRef.current?.frameIndex(patchyHeadFrame.current)
+            patchyBlinkRightRef.current?.frameIndex(patchyHeadFrame.current)
             patchyMobBlinkRef.current?.frameIndex(patchyHeadFrame.current)
 
             bearIdleRef.current?.frameIndex(bearIdleFrame.current);
@@ -272,8 +279,10 @@ const SpriteAnimation = ({ shotTrigger }) => {
                             {/* Position */}
                             <PatchyShot spriteRef={patchyHandShotRef} />
                             {/*  */}
-                            <PatchyBlink spriteRef={patchyBlinkRef} />
-
+                            {/* <PatchyBlink spriteRef={patchyBlinkRef} /> */}
+                            <PatchyBlinkLeft spriteRef={patchyBlinkLeftRef}/>
+                            <PatchyBlinkRight spriteRef={patchyBlinkRightRef}/>
+                            
                         </Group>
                     </Layer>
 
