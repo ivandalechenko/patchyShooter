@@ -5,14 +5,14 @@ import BearIdleShadow from './BearIdleShadow';
 export default (({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
-    const frameW = 500;
-    const frameH = 478;
-    const framesInRow = 8;
+    const frameW = 337;
+    const frameH = 481;
+    const framesInRow = 11;
     const framesCount = 61;
 
     useEffect(() => {
         const img = new Image();
-        img.src = '/bear.webp';
+        img.src = '/bearIdle.webp';
         img.onload = () => setImage(img);
     }, []);
 
@@ -27,12 +27,15 @@ export default (({ spriteRef }) => {
     }, []);
 
 
+    // const getY = () => window.innerHeight / 2 - 239
+    const getY = () => window.innerHeight / 2 - 265
 
-    const [y, setY] = useState(() => window.innerHeight / 2 - 239);
+
+    const [y, setY] = useState(() => getY());
 
     useEffect(() => {
         const handleResize = () => {
-            setY(window.innerHeight / 2 - 239);
+            setY(getY());
         };
 
         window.addEventListener('resize', handleResize);
@@ -50,7 +53,7 @@ export default (({ spriteRef }) => {
                         image={image}
                         animation="run"
                         animations={animations}
-                        x={100}
+                        x={157}
                         y={y}
                     />
                 </>

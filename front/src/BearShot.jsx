@@ -5,9 +5,9 @@ export default (({ spriteRef }) => {
 
     const [image, setImage] = useState(null);
 
-    const frameW = 500;
-    const frameH = 478;
-    const framesInRow = 8;
+    const frameW = 358;
+    const frameH = 480;
+    const framesInRow = 11;
     const framesCount = 21;
 
     useEffect(() => {
@@ -27,13 +27,13 @@ export default (({ spriteRef }) => {
     }, []);
 
 
+    const getY = () => window.innerHeight / 2 - 264
 
-
-    const [y, setY] = useState(() => window.innerHeight / 2 - 239);
+    const [y, setY] = useState(() => getY());
 
     useEffect(() => {
         const handleResize = () => {
-            setY(window.innerHeight / 2 - 239);
+            setY(getY());
         };
 
         window.addEventListener('resize', handleResize);
@@ -50,7 +50,7 @@ export default (({ spriteRef }) => {
                     image={image}
                     animation="run"
                     animations={animations}
-                    x={100}
+                    x={111}
                     opacity={0}
                     y={y}
                 />

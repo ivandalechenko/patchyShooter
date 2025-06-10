@@ -27,6 +27,7 @@ export default (({ spriteRef }) => {
 
 
     const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
+    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
 
     useEffect(() => {
         const handleResize = () => {
@@ -36,9 +37,6 @@ export default (({ spriteRef }) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-
-    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
 
     useEffect(() => {
         const handleResize = () => {

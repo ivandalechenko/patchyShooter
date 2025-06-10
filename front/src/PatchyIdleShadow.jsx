@@ -50,8 +50,8 @@ export default observer(() => {
             image={image}
             x={x}
             y={y}
-            width={1700}
-            height={1700 / 1.9}
+            width={1900}
+            height={1900 / 1.9}
 
         />
     );

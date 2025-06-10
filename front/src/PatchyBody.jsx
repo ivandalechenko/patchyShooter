@@ -5,9 +5,9 @@ import PatchyIdleShadow from './PatchyIdleShadow';
 export default (({ spriteRef }) => {
     const [image, setImage] = useState(null);
 
-    const frameW = 500;
-    const frameH = 422;
-    const framesInRow = 8;
+    const frameW = 222;
+    const frameH = 243;
+    const framesInRow = 18;
     const framesCount = 61;
 
     useEffect(() => {
@@ -27,33 +27,30 @@ export default (({ spriteRef }) => {
     }, []);
 
 
+    const getX = () => window.innerWidth - 195 - frameW
+    const getY = () => window.innerHeight / 2 - frameH / 2 + 75
 
 
-    const [y, setY] = useState(() => window.innerHeight / 2 - frameH / 2);
+    const [y, setY] = useState(() => getY());
+    const [x, setX] = useState(() => getX());
 
     useEffect(() => {
         const handleResize = () => {
-            setY(window.innerHeight / 2 - frameH / 2);
+            setY(getY());
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-
-
-    const [x, setX] = useState(() => window.innerWidth - 100 - frameW);
-
     useEffect(() => {
         const handleResize = () => {
-            setX(window.innerWidth - 100 - frameW);
+            setX(getX());
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-
 
     return (
         <>

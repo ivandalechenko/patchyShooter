@@ -26,7 +26,7 @@ const holeFramesCount = 21
 const bloodFramesCount = 21
 
 
-const FPS = 24
+const FPS = 20
 
 
 const SpriteAnimation = ({ shotTrigger }) => {
@@ -70,16 +70,13 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
             setTimeout(() => {
                 bearShotFrame.current = 0
-                setTimeout(() => {
-
-                    if (Math.random() > .5) {
-                        hole1Frame.current = 0
-                        hole2Frame.current = -1
-                    } else {
-                        hole2Frame.current = 0
-                        hole1Frame.current = -1
-                    }
-                }, 40);
+                if (Math.random() > .5) {
+                    hole1Frame.current = 0
+                    hole2Frame.current = -1
+                } else {
+                    hole2Frame.current = 0
+                    hole1Frame.current = -1
+                }
                 setTimeout(() => {
                     bloodFrame.current = 0
                 }, 400);
@@ -169,6 +166,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
             bearIdleRef.current?.frameIndex(bearIdleFrame.current);
             bearShotRef.current?.frameIndex(bearShotFrame.current);
+
             hole1Ref.current?.frameIndex(hole1Frame.current);
             hole2Ref.current?.frameIndex(hole2Frame.current);
             bloodRef.current?.frameIndex(bloodFrame.current);
@@ -182,12 +180,22 @@ const SpriteAnimation = ({ shotTrigger }) => {
             if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(patchyHandShotFrame.current >= 0 ? 0 : 1);
             if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(patchyHandShotFrame.current >= 0 ? 1 : 0);
 
-
             bearIdleRef.current?.getLayer()?.batchDraw();
             patchyHeadRef.current?.getLayer()?.batchDraw();
-            hole1Ref.current?.getLayer()?.batchDraw();
-            // timeout.current = setTimeout(runFrame, 1000 / animStore.fps);
-            // console.log(`FRAME: bearIdle: ${bearIdleFrame.current} patchyHeadFrame: ${patchyHeadFrame.current}`);
+            // hole1Ref.current?.getLayer()?.batchDraw();
+
+
+            // НИЖЕ ОТЛАДОЧНОЕ
+            // console.log(`${bearIdleFrame.current}`);
+
+            // const frm = 10
+
+            // hole2Ref.current?.frameIndex(frm);
+            // bearShotRef.current?.frameIndex(frm);
+            // bearIdleRef.current?.frameIndex(frm);
+            // if (hole2Ref.current) hole2Ref.current.opacity(1);
+            // if (bearIdleRef.current) bearIdleRef.current.opacity(0);
+            // if (bearShotRef.current) bearShotRef.current.opacity(1);
         };
 
 
@@ -246,7 +254,7 @@ const SpriteAnimation = ({ shotTrigger }) => {
 
                     <Layer y={window.innerHeight / 8}>
                         <Group x={bearX}>
-                            <BearBlood spriteRef={bloodRef} />
+                            {/* <BearBlood spriteRef={bloodRef} /> */}
                             <BearHole1 spriteRef={hole1Ref} />
                             <BearHole2 spriteRef={hole2Ref} />
                         </Group>
@@ -255,10 +263,13 @@ const SpriteAnimation = ({ shotTrigger }) => {
                     <Layer y={window.innerHeight / 8}>
                         <Group x={patchyX} y={patchyY}>
                             <PatchyBody spriteRef={patchyHeadRef} />
+
+                            <PatchyHead spriteRef={patchyBodyRef} />
+                            {/* 
                             <PatchyHand spriteRef={patchyHandIdleRef} />
                             <PatchyShot spriteRef={patchyHandShotRef} />
-                            <PatchyHead spriteRef={patchyBodyRef} />
-                            <PatchyBlink spriteRef={patchyBlinkRef} />
+                            <PatchyBlink spriteRef={patchyBlinkRef} /> 
+                            */}
                         </Group>
                     </Layer>
 
