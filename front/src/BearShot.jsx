@@ -12,7 +12,7 @@ export default (({ spriteRef }) => {
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/bearShot.webp';
+        img.src = '/bearShot2.webp';
         img.onload = () => setImage(img);
     }, []);
 
