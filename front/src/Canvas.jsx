@@ -286,12 +286,12 @@ const SpriteAnimation = ({ shotTrigger }) => {
                         <Group x={patchyX} y={patchyY}>
                             <PatchyBody spriteRef={patchyBodyRef} />
                             {/* Position done */}
-                            <PatchyHead spriteRef={patchyHeadRef} />
                             {/*  */}
                             <PatchyHand spriteRef={patchyHandIdleRef} />
                             {/* Position */}
                             <PatchyShot spriteRef={patchyHandShotRef} />
                             {/*  */}
+                            <PatchyHead spriteRef={patchyHeadRef} />
                             <PatchyBlinkLeft spriteRef={patchyBlinkLeftRef} />
                             <PatchyBlinkRight spriteRef={patchyBlinkRightRef} />
 
