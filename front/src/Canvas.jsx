@@ -285,7 +285,6 @@ const SpriteAnimation = ({ shotTrigger }) => {
                             {/* Position */}
                             <PatchyShot spriteRef={patchyHandShotRef} />
                             {/*  */}
-                            {/* <PatchyBlink spriteRef={patchyBlinkRef} /> */}
                             <PatchyBlinkLeft spriteRef={patchyBlinkLeftRef} />
                             <PatchyBlinkRight spriteRef={patchyBlinkRightRef} />
 
