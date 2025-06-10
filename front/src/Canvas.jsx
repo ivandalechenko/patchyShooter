@@ -195,8 +195,14 @@ const SpriteAnimation = ({ shotTrigger }) => {
             // НИЖЕ ОТЛАДОЧНОЕ
             // console.log(`${bearIdleFrame.current}`);
 
-            // const frm = 0
-            // patchyBodyRef.current?.frameIndex(frm);
+            const frm = 1
+
+            if (patchyBlinkLeftRef.current) patchyBlinkLeftRef.current.opacity(1);
+            if (patchyBlinkRightRef.current) patchyBlinkRightRef.current.opacity(1);
+            patchyHeadRef.current?.frameIndex(frm);
+            patchyBlinkLeftRef.current?.frameIndex(frm);
+            patchyBlinkRightRef.current?.frameIndex(frm);
+
             // patchyHandShotRef.current?.frameIndex(frm);
             // if (patchyHandShotRef.current) patchyHandShotRef.current.opacity(1);
             // if (patchyHandIdleRef.current) patchyHandIdleRef.current.opacity(0);
@@ -280,9 +286,9 @@ const SpriteAnimation = ({ shotTrigger }) => {
                             <PatchyShot spriteRef={patchyHandShotRef} />
                             {/*  */}
                             {/* <PatchyBlink spriteRef={patchyBlinkRef} /> */}
-                            <PatchyBlinkLeft spriteRef={patchyBlinkLeftRef}/>
-                            <PatchyBlinkRight spriteRef={patchyBlinkRightRef}/>
-                            
+                            <PatchyBlinkLeft spriteRef={patchyBlinkLeftRef} />
+                            <PatchyBlinkRight spriteRef={patchyBlinkRightRef} />
+
                         </Group>
                     </Layer>
 

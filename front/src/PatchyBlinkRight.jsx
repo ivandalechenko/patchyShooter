@@ -6,7 +6,7 @@ export default (({ spriteRef }) => {
 
     const frameW = 104;
     const frameH = 102;
-    const framesInRow = 1;
+    const framesInRow = 9;
     const framesCount = 9;
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export default (({ spriteRef }) => {
 
     const getX = () => window.innerWidth - 600 - frameW;
     const getY = () => window.innerHeight - 600 - frameH;
-    
+
     const [x, setX] = useState(() => getX());
     const [y, setY] = useState(() => getY());
 
