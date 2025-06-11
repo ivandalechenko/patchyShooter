@@ -133,3 +133,8 @@ html {
     background: #000;
     min-height: 100vh;
 }
+
+@font-face {
+    font-family: 'LCD';
+    src: url('/lcd.ttf') format('truetype');
+}

@@ -12,7 +12,7 @@ export default (({ spriteRef, oldBlood, newBlood }) => {
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = '/bearBlood.webp';
+        img.src = '/bearBlood2.webp';
         img.onload = () => setImage(img);
     }, []);
 

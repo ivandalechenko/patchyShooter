@@ -29,7 +29,7 @@ const holeFramesCount = 21
 const bloodFramesCount = 35
 
 
-const FPS = 20
+const FPS = 30
 
 
 const SpriteAnimation = ({ shotTrigger }) => {
@@ -77,36 +77,36 @@ const SpriteAnimation = ({ shotTrigger }) => {
             patchyHandShotFrame.current = 0
             console.log('shot');
 
+            // setTimeout(() => {
+            bearShotFrame.current = 0
+            if (Math.random() > .5) {
+                hole1Frame.current = 0
+                hole2Frame.current = -1
+            } else {
+                hole2Frame.current = 0
+                hole1Frame.current = -1
+            }
+            // setTimeout(() => {
+            bloodFrame.current = 0
+
+            const frameW = 396;
+            const frameH = 146;
+            const getX = () => window.innerWidth - (window.innerWidth - frameW / 2) - frameW;
+            const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH - frameH / 3) - frameH;
+
+            oldBloodCount.current = Math.min(oldBloodCount.current + 1, 2);
+            if (bloodRef.current) {
+                bloodRef.current.x(getX() + [0, -100, 0][oldBloodCount.current - 1])
+                bloodRef.current.y(getY() + [0, 300, -500][oldBloodCount.current - 1])
+                bloodRef.current.rotation([0, -25, 40][oldBloodCount.current - 1])
+                console.log(bloodRef.current);
+            }
+
             setTimeout(() => {
-                bearShotFrame.current = 0
-                if (Math.random() > .5) {
-                    hole1Frame.current = 0
-                    hole2Frame.current = -1
-                } else {
-                    hole2Frame.current = 0
-                    hole1Frame.current = -1
-                }
-                setTimeout(() => {
-                    bloodFrame.current = 0
-
-                    const frameW = 396;
-                    const frameH = 146;
-                    const getX = () => window.innerWidth - (window.innerWidth - frameW / 2) - frameW;
-                    const getY = () => window.innerHeight - (window.innerHeight / 2 - frameH - frameH / 3) - frameH;
-
-                    oldBloodCount.current = Math.min(oldBloodCount.current + 1, 2);
-                    if (bloodRef.current) {
-                        bloodRef.current.x(getX() + [0, -100, 0][oldBloodCount.current - 1])
-                        bloodRef.current.y(getY() + [0, 300, -500][oldBloodCount.current - 1])
-                        bloodRef.current.rotation([0, -25, 40][oldBloodCount.current - 1])
-                        console.log(bloodRef.current);
-                    }
-
-                    setTimeout(() => {
-                        setoldBlood(oldBloodCount.current)
-                    }, 200);
-                }, 400);
+                setoldBlood(oldBloodCount.current)
             }, 200);
+            // }, 400);
+            // }, 200);
         }
     }, [shotTrigger])
 

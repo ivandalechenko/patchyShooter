@@ -30,6 +30,21 @@
         }
     }
 
+    &_counter {
+        font-family: 'LCD';
+        font-size: 80px;
+        color: #DDF3ED;
+
+        &_wrapper {
+            top: 20vw;
+            width: 100% !important;
+
+            @media(max-width: 800px) {
+                display: none !important;
+            }
+        }
+    }
+
     &_noise {
         position: fixed;
         left: 0;
@@ -63,7 +78,6 @@
             width: 100% !important;
             align-items: start !important;
             z-index: 0;
-
         }
     }
 
@@ -73,7 +87,7 @@
             top: -50px;
             width: 100% !important;
             align-items: end !important;
-            z-index: 0;
+            z-index: 99;
 
             @media(max-width: 500px) {
                 top: 0px;

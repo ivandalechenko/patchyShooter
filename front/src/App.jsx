@@ -42,14 +42,16 @@ function App() {
   const [shotTrigger, setshotTrigger] = useState(0);
   const lastShot = useRef(null);
 
+  const [counter, setcounter] = useState(0);
 
   return (
     <div className='App'
       onPointerDown={() => {
         const now = Date.now(); // время в миллисекундах с 1 января 1970
-        if (now - lastShot.current < 500) return
+        if (now - lastShot.current < 300) return
         lastShot.current = now;
         setshotTrigger(Math.random())
+        setcounter(c => c + 1);
       }}
 
     >
@@ -57,6 +59,11 @@ function App() {
       <div className='App_header_wrapper free_img'>
         <div className='App_header' >
           <Kill />
+        </div>
+      </div>
+      <div className='App_counter_wrapper free_img'>
+        <div className='App_counter' >
+          {String(counter).padStart(3, '0')}
         </div>
       </div>
       <div className='App_canvas'>
