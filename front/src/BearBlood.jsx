@@ -60,7 +60,7 @@ export default (({ spriteRef, oldBlood, newBlood }) => {
 
     return (
         <>
-            {oldBlood > 0 && imgBloodOld &&
+            {/* {oldBlood > 0 && imgBloodOld &&
                 <KonvaImage
                     image={imgBloodOld}
                     x={x}
@@ -77,7 +77,6 @@ export default (({ spriteRef, oldBlood, newBlood }) => {
                     opacity={1}
                 />
             }
-            {/* {oldBlood > 2 && imgBloodOld && */}
             {oldBlood > 2 && imgBloodOld &&
                 <KonvaImage
                     image={imgBloodOld}
@@ -86,7 +85,7 @@ export default (({ spriteRef, oldBlood, newBlood }) => {
                     rotation={40}
                     opacity={1}
                 />
-            }
+            } */}
             {image && (
                 <Sprite
                     ref={spriteRef}
