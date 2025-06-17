@@ -16,6 +16,10 @@ export default () => {
             <a href="https://dexscreener.com/solana/a8mbsuqkajmtsu42jdwphjko3vqc9srdfpdsf3sz5huf" target='_blank'>
                 <img src="/dex.svg" alt="" />
             </a>
+            <a href="https://www.tiktok.com/@patchyonsol" target='_blank'>
+                <img src="/tt.svg" alt="" />
+            </a>
+
 
             <a className='Media_inactive'
                 onMouseEnter={() => { setinstHover(true) }}
@@ -25,12 +29,6 @@ export default () => {
             </a>
 
 
-            <a className='Media_inactive'
-                onMouseEnter={() => { setttHover(true) }}
-                onMouseLeave={() => { setttHover(false) }}
-            >
-                <img src={`${ttHover ? '/soon.svg' : '/tt.svg'}`} className='Media_inactive_base' alt="" />
-            </a>
         </div>
     )
 }
