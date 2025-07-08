@@ -2,19 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-// const inputDir = './bearIdle';
-// const inputDir = './bearShot';
-// const inputDir = './bearHole1';
-// const inputDir = './bearHole2';
-// const inputDir = './bearIdle';
-// const inputDir = './patchyBody';
-// const inputDir = './patchyHead';
-// const inputDir = './bearBlood';
-// const inputDir = './patchyHandIdle';
-// const inputDir = './patchyHandShot';
-// const inputDir = './patchyBlink';
-const inputDir = './patchyBlinkRight';
-// const inputDir = './patchyBlinkLeft';
+const inputDir = './phonePC';
+// const inputDir = './headPC';
+// const inputDir = './handPC';
 
 
 const outputDir = './cropped';
@@ -111,6 +101,6 @@ const files = fs.readdirSync(inputDir)
     }));
 
     await sprite.composite(composites).webp({ quality: webpQuality }).toFile(path.join(outputDir, `${inputDir.slice(2)}.webp`));
-
+    console.log(`🖼 Всего кадров: ${totalFrames}`);
     console.log(`✅ Спрайт сохранён! ${inputDir.slice(2)}.webp`);
 })();
