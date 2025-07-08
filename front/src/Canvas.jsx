@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Group } from 'react-konva';
 
 import Table from './Table';
+import Turner from './Turner';
 import SofaBack from './SofaBack';
 import SofaSide from './SofaSide';
 import Body from './Body';
 import Pic from './Pic';
 import PhoneBase from './PhoneBase';
 import TvVid from './TvVid';
+import Arrow from './Arrow';
 
 
 
@@ -22,7 +24,7 @@ const phonePCFramesCount = 5
 const FPS = 30
 
 
-const SpriteAnimation = ({ }) => {
+const SpriteAnimation = ({ moneyStarted, startTv }) => {
 
     const layerRef = useRef(null)
 
@@ -34,6 +36,13 @@ const SpriteAnimation = ({ }) => {
 
     const phonePCRef = useRef(null)
     const phonePCFrame = useRef(null)
+    const phoneRinging = useRef(null)
+
+
+    useEffect(() => {
+        phoneRinging.current = true
+        if (moneyStarted) phoneRinging.current = false
+    }, [moneyStarted])
 
     useEffect(() => {
 
@@ -67,8 +76,11 @@ const SpriteAnimation = ({ }) => {
 
             headPCRef.current?.frameIndex(headPCFrame.current);
             handPCRef.current?.frameIndex(handPCFrame.current);
-            phonePCRef.current?.frameIndex(phonePCFrame.current > phonePCFramesCount * 4 ? 0 : phonePCFrame.current % phonePCFramesCount);
-
+            if (phoneRinging.current) {
+                phonePCRef.current?.frameIndex(phonePCFrame.current > phonePCFramesCount * 4 ? 0 : phonePCFrame.current % phonePCFramesCount);
+            } else {
+                phonePCRef.current?.frameIndex(0);
+            }
             layerRef.current?.batchDraw();
         };
 
@@ -104,7 +116,7 @@ const SpriteAnimation = ({ }) => {
                         ref={layerRef}
                         listening={false}
                     >
-                        <TvVid />
+                        <TvVid play={startTv} />
                     </Layer>
                 }
                 <Layer listening={false} x={
@@ -122,6 +134,8 @@ const SpriteAnimation = ({ }) => {
                             <Pic />
                             <PhonePc spriteRef={phonePCRef} framesCount={phonePCFramesCount} />
                             <PhoneBase />
+                            <Turner play={startTv} />
+                            <Arrow play={startTv} />
                         </>
                     }
                 </Layer>

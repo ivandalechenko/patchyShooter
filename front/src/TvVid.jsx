@@ -1,73 +1,117 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Image } from 'react-konva';
+import { Image, Rect, Group } from 'react-konva';
 
-const w = 250
+const w = 250;
 
-const TvVid = ({ }) => {
+const TvVid = ({ play }) => {
     const videoRef = useRef(null);
     const imageRef = useRef(null);
-    const [ready, setReady] = useState(false); // 👈
+    const [ready, setReady] = useState(false);
+    const [videoReady, setVideoReady] = useState(false);
+    const [x, setX] = useState(0);
+    const [y, setY] = useState(0);
+
+    const getX = () => window.innerWidth / 2 - w / 2 - 230;
+    const getY = () => window.innerHeight - w - 225;
 
     useEffect(() => {
-        const videoElement = document.createElement('video');
-        videoElement.src = '/tv.mp4';
-        videoElement.loop = true;
-        videoElement.muted = true;
-        videoElement.playsInline = true;
-
-        videoRef.current = videoElement;
-
-        videoElement.play()
-            .then(() => setReady(true)) // 👈 запускаем повторный рендер
-            .catch(err => console.error('Ошибка воспроизведения видео:', err));
-
-        const updateCanvas = () => {
-            imageRef.current?.getLayer()?.batchDraw();
+        const updatePos = () => {
+            setX(getX());
+            setY(getY());
         };
+        updatePos();
+        window.addEventListener('resize', updatePos);
+        return () => window.removeEventListener('resize', updatePos);
+    }, []);
 
-        const anim = new window.Konva.Animation(updateCanvas);
+    useEffect(() => {
+        const video = document.createElement('video');
+        video.src = '/tv.mp4';
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+
+        videoRef.current = video;
+
+        const anim = new window.Konva.Animation(() => {
+            imageRef.current?.getLayer()?.batchDraw();
+        });
         anim.start();
+
+        setReady(true);
 
         return () => {
             anim.stop();
-            videoElement.pause();
+            video.pause();
         };
     }, []);
 
-
-    const [y, setY] = useState(0);
-    const [x, setX] = useState(0);
-
-
-    const getX = () => window.innerWidth / 2 - w / 2 - 230
-    const getY = () => window.innerHeight - w - 225
-
     useEffect(() => {
-        const handleResize = () => {
-            if (imageRef) {
-                setX(getX());
-                setY(getY());
-            }
-        };
-        handleResize()
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [imageRef]);
+        if (play && videoRef.current && !videoReady) {
+            videoRef.current.play()
+                .then(() => setVideoReady(true))
+                .catch(console.error);
+        }
+    }, [play]);
 
-
-    if (!ready || !videoRef.current) return null;
+    if (!ready) return null;
 
     return (
-        <Image
-            ref={imageRef}
-            image={videoRef.current}
-            x={x}
-            y={y}
-            width={w}
-            height={w}
-            skewY={-0.1}
-            skewX={0.05}
-        />
+        <Group>
+            {play ? (
+                <>
+                    {/* Черная подложка ниже */}
+                    <Rect
+                        x={x}
+                        y={y}
+                        width={w}
+                        height={w}
+                        fill="black"
+                        skewY={-0.1}
+                        skewX={0.05}
+                        listening={false}
+                    />
+                    {/* Видео выше */}
+                    {videoReady && <Image
+                        ref={imageRef}
+                        image={videoRef.current}
+                        x={x}
+                        y={y}
+                        width={w}
+                        height={w}
+                        skewY={-0.1}
+                        skewX={0.05}
+                        listening={false}
+                    />}
+                </>
+            ) : (
+                <>
+                    {/* Видео ниже (не видно) */}
+                    {videoReady && <Image
+                        ref={imageRef}
+                        image={videoRef.current}
+                        x={x}
+                        y={y}
+                        width={w}
+                        height={w}
+                        skewY={-0.1}
+                        skewX={0.05}
+                        listening={false}
+                    />}
+                    {/* Черная заглушка выше */}
+                    <Rect
+                        x={x}
+                        y={y}
+                        width={w}
+                        height={w}
+                        fill="black"
+                        skewY={-0.1}
+                        skewX={0.05}
+                        listening={false}
+                    />
+                </>
+            )}
+        </Group>
     );
 };
 

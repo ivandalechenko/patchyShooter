@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './App.scss';
 import Canvas from './Canvas';
 import Media from './Media';
@@ -6,9 +6,12 @@ import Media from './Media';
 
 function App() {
 
+  const [moneyStarted, setmoneyStarted] = useState(false);
+
   const videoRef = useRef(null)
 
   const runVideo = () => {
+    setmoneyStarted(true)
     const vid = videoRef.current;
     vid.currentTime = 0;
     vid.style.opacity = 1;
@@ -30,6 +33,9 @@ function App() {
 
   }
 
+  const [startTv, setstartTv] = useState(false);
+
+
 
   return (
     <div className='App'>
@@ -45,7 +51,7 @@ function App() {
       <div className='App_noise'></div>
 
       <div className='App_canvas'>
-        <Canvas />
+        <Canvas moneyStarted={moneyStarted} startTv={startTv} />
       </div>
       <div className='App_footer_wrapper free_img'>
         <div className='App_footer' >
@@ -55,6 +61,12 @@ function App() {
       {
         window.innerWidth > 800 && <div className='App_interactive_wrapper free_img'>
           <div className='App_interactive' onClick={runVideo}>
+          </div>
+        </div>
+      }
+      {
+        window.innerWidth > 800 && <div className='App_interactiveTv_wrapper free_img'>
+          <div className='App_interactiveTv' onClick={() => { setstartTv(!startTv) }}>
           </div>
         </div>
       }

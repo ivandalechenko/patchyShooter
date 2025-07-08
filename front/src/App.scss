@@ -84,6 +84,21 @@
         }
     }
 
+    &_interactiveTv {
+        min-width: 60px;
+        min-height: 60px;
+        // background: #f008;
+        cursor: pointer;
+
+        &_wrapper {
+            left: -52px;
+            top: -415px;
+            z-index: 999;
+            width: 100% !important;
+            align-items: end !important;
+        }
+    }
+
     &_vid {
         width: 100% !important;
         top: 50vh;
