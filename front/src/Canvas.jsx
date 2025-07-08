@@ -108,7 +108,7 @@ const SpriteAnimation = ({ }) => {
                     </Layer>
                 }
                 <Layer listening={false} x={
-                    window.innerWidth > 800 ? 0 : -450
+                    window.innerWidth > 800 ? 0 : -400
                 }>
                     <HandPC spriteRef={handPCRef} framesCount={handPCFramesCount} />
                     <SofaBack />
